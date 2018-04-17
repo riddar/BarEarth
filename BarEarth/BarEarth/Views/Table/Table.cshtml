@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BarEarth.Models.Bar>
+@inject BarEarth.Data.ApplicationDbContext context;
+@{ViewData["Title"] = "Bars";}
+
+<h1>BarEarth</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Table">
+            <div asp-validation-summary="ModelOnly" class="text-danger" />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.ActionLink("BarName", "Table", new { sortOrder = ViewBag.BarName })</th>
+                        <th>@Html.ActionLink("price", "Table", new { sortOrder = ViewBag.Price })</th>
+                        <th>@Html.ActionLink("Distance", "Table", new { sortOrder = ViewBag.Distance })</th>
+                        <th>@Html.ActionLink("Comments", "Table", new { sortOrder = ViewBag.Comments })</th>
+                        <th>@Html.ActionLink("Rating", "Table", new { sortOrder = ViewBag.Rating })</th>
+                    </tr>
+                </thead>
+                <tbody class="BarsTable">
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

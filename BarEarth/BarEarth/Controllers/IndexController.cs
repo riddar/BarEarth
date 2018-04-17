@@ -25,16 +25,25 @@ namespace BarEarth.Controllers
             return View();
         }
 
-        [HttpPost, ActionName("IndexMapPost")]
+        [HttpPost]
         public IActionResult IndexMapPost(string address)
         {
+            if (AddressExists(address) == false)
+                return NotFound();
+                
             return RedirectToAction("Map", "Map", address);
         }
 
-        [HttpPost, ActionName("IndexTablePost")]
+        [HttpPost]
         public IActionResult IndexTablePost(string address)
         {
             return RedirectToAction("Table", "Table", address);
+        }
+
+        public bool AddressExists(string address)
+        {
+            //fix later
+            return false;
         }
     }
 }
