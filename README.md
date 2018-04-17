@@ -1,1 +1,1 @@
-BarEarth
+BarEarth is an app for searching for the closest bar and price and other parameters.
