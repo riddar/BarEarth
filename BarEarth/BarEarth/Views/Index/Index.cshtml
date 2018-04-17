@@ -6,7 +6,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="IndexGet">
+        <form asp-action="Index">
             <div asp-validation-summary="ModelOnly" class="text-danger" />
             <div class="form-group">
                 <label>Address</label>
@@ -14,8 +14,8 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Map" formaction="IndexMapPost" class="btn btn-default" />
-                <input type="submit" value="Table" formaction="IndexTablePost" class="btn btn-default" />
+                <input type="submit" value="Map" asp-action="IndexMapPost" class="btn btn-default" />
+                <input type="submit" value="Table" asp-action="IndexTablePost" class="btn btn-default" />
             </div>
         </form>
     </div>
