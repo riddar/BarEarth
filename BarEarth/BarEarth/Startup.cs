@@ -50,7 +50,7 @@ namespace BarEarth
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/BarEarth/Error");
             }
 
             app.UseStaticFiles();
@@ -61,7 +61,7 @@ namespace BarEarth
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=BarEarth}/{action=Index}/{id?}");
             });
         }
     }
