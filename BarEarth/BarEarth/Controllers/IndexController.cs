@@ -37,13 +37,16 @@ namespace BarEarth.Controllers
         [HttpPost]
         public IActionResult IndexTablePost(string address)
         {
+            if (AddressExists(address) == false)
+                return NotFound();
+
             return RedirectToAction("Table", "Table", address);
         }
 
         public bool AddressExists(string address)
         {
             //fix later
-            return false;
+            return true;
         }
     }
 }

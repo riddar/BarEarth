@@ -22,7 +22,6 @@ namespace BarEarth.Controllers
         public async Task<IActionResult> TableGet(string sortOrder, string address)
         {
             var Bars = await context.Bars.ToListAsync();
-            var Ratings = await context.Ratings.ToListAsync();
 
             ViewBag.BarName = sortOrder == "BarName" ? "BarName_desc" : "BarName";
             ViewBag.Price = sortOrder == "Price" ? "Price_desc" : "Price";
