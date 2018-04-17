@@ -5,6 +5,7 @@ let longitude = 11.9746;
 let currentPosition;
 let key = 'AIzaSyCLckiV9wHca0kEmxx40Ch9RnHOIvVgdFE';
 
+
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
         UpdatePosition(position.coords.latitude, position.coords.longitude);
@@ -36,7 +37,7 @@ function initMap() {
     // Perform a nearby search.
     service.nearbySearch({
         location: currentPosition,
-        radius: 1500,
+        radius: 5000,
         type: ['bar']
     },
         function (results, status, pagination) {
@@ -45,11 +46,6 @@ function initMap() {
             createMarkers(results);
             getPlaceInfo(results[0].place_id);
         });
-
-    let marker = new google.maps.Marker({
-        map: map,
-        position: currentPosition
-    });
 }
 
 function createMarkers(places) {
@@ -87,6 +83,11 @@ function createMarkers(places) {
 function UpdatePosition(lati, longi) {
     longitude = longi;
     latitude = lati;
+
+    let marker = new google.maps.Marker({
+        map: map,
+        position: { lat: lati, lng: longi }
+    });
 
     if (map)
         map.setCenter({ lat: lati, lng: longi });
