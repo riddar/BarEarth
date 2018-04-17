@@ -1,5 +1,11 @@
-﻿@model IEnumerable<BarEarth.Models.Bar>
+﻿@model BarEarth.Models.Bar
 @inject BarEarth.Data.ApplicationDbContext context;
 @{ViewData["Title"] = "Address";}
 
 <h1>BarEarth</h1>
+
+<form asp-action="Index">
+    <div asp-validation-summary="ModelOnly" class="text-danger" />
+    <label>Address</label>
+    <input asp-for="PlaceId" />
+</form>
