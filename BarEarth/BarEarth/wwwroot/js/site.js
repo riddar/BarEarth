@@ -121,6 +121,7 @@ function UpdatePosition(lati, longi) {
         lat: lati,
         lng: longi
     };
+    nearbySearch(currentPosition);
 
     let marker = new google.maps.Marker({
         map: map,
@@ -130,7 +131,6 @@ function UpdatePosition(lati, longi) {
     if (map)
         map.setCenter({ lat: lati, lng: longi });
 
-    nearbySearch(currentPosition);
     //initMap();
 };
 
