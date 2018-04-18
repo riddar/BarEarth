@@ -1,4 +1,15 @@
 ﻿// Write your JavaScript code.
+
+window.addEventListener('load', function () {
+
+
+    map.addListener('bounds_changed', function () {
+        console.log("bounds changed");
+    });
+
+});
+
+
 let map = null;
 let latitude = 57.7089;
 let longitude = 11.9746;
@@ -78,6 +89,7 @@ function createMarkers(places) {
         });
 
     }
+
 }
 
 function UpdatePosition(lati, longi) {
