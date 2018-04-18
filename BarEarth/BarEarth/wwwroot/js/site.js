@@ -5,7 +5,7 @@ let map = null;
 let latitude = 57.7089;
 let longitude = 11.9746;
 let currentPosition;
-let key = 'AIzaSyCLckiV9wHca0kEmxx40Ch9RnHOIvVgdFE';
+let key = 'AIzaSyCNTmJ9FGN1shynaOZ8niPI3OQLRAUbP4o';
 let markers = [];
 
 
