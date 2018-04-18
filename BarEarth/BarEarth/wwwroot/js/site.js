@@ -3,7 +3,11 @@
 window.addEventListener('load', function () {
 
     map.addListener('bounds_changed', function () {
+       
         console.log("bounds changed");
+
+        console.log(markers.length)
+
     });
 
 });
@@ -14,8 +18,7 @@ let latitude = 57.7089;
 let longitude = 11.9746;
 let currentPosition;
 let key = 'AIzaSyCLckiV9wHca0kEmxx40Ch9RnHOIvVgdFE';
-
-
+let markers = [];
 
 
 
@@ -24,6 +27,7 @@ function initMap() {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
+
             UpdatePosition(position.coords.latitude, position.coords.longitude);
         });
     }
@@ -44,27 +48,21 @@ function initMap() {
         zoom: 15
     });
 
-    let service = new google.maps.places.PlacesService(map);
-    let getNextPage = null;
+    nearbySearch(currentPosition);
 
-    // Perform a nearby search.
-    service.nearbySearch({
-        location: currentPosition,
-        radius: 5000,
-        type: ['bar']
-    },
-        function (results, status, pagination) {
-            if (status !== 'OK') return;
-
-            createMarkers(results);
-            getPlaceInfo(results[0].place_id);
-        });
 }
 
 function createMarkers(places) {
 
+    markers.forEach(function (marker) {
+        marker.setMap(null);
+    });
+
+    markers = [];
+
     for (let i = 0; i<places.length; i++) {
 
+    
         let place = places[i];
 
         let infowindow = new google.maps.InfoWindow({
@@ -90,13 +88,39 @@ function createMarkers(places) {
             infowindow.open(map, marker);
         });
 
-    }
+        markers.push(marker);
 
+    }
+    console.log(markers.length)
+}
+
+function nearbySearch(position) {
+
+    let service = new google.maps.places.PlacesService(map);
+    let getNextPage = null;
+
+    // Perform a nearby search.
+    service.nearbySearch({
+        location: position,
+        radius: 1500,
+        type: ['bar']
+    },
+        function (results, status, pagination) {
+            if (status !== 'OK') return;
+
+            createMarkers(results);
+            getPlaceInfo(results[0].place_id);
+        });
 }
 
 function UpdatePosition(lati, longi) {
     longitude = longi;
     latitude = lati;
+
+    currentPosition = {
+        lat: lati,
+        lng: longi
+    };
 
     let marker = new google.maps.Marker({
         map: map,
@@ -105,6 +129,8 @@ function UpdatePosition(lati, longi) {
 
     if (map)
         map.setCenter({ lat: lati, lng: longi });
+
+    nearbySearch(currentPosition);
     //initMap();
 };
 
