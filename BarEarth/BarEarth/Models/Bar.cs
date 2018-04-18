@@ -26,6 +26,7 @@ namespace BarEarth.Models
         [StringLength(255)]
         public string Email { get; set; }
         public string FaceBook { get; set; }
+        public string PlaceId { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BarEarth.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarEarth.Controllers
@@ -12,7 +13,7 @@ namespace BarEarth.Controllers
         {
             return View();
         }
-        public IActionResult Map()
+        public IActionResult Map(Bar bar)
         {
             ViewData["Info"] = "test";
 
