@@ -2,7 +2,6 @@
 
 window.addEventListener('load', function () {
 
-
     map.addListener('bounds_changed', function () {
         console.log("bounds changed");
     });
@@ -17,17 +16,20 @@ let currentPosition;
 let key = 'AIzaSyCLckiV9wHca0kEmxx40Ch9RnHOIvVgdFE';
 
 
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-        UpdatePosition(position.coords.latitude, position.coords.longitude);
-    });
-} else {
-    latitude = 57.7089;
-    longitude = 11.9746;
-}
+
 
 
 function initMap() {
+
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            UpdatePosition(position.coords.latitude, position.coords.longitude);
+        });
+    }
+    else {
+        console.log("couldn't get position");
+    }
 
 
     currentPosition = {
