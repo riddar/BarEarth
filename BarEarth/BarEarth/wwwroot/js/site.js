@@ -1,19 +1,5 @@
 ﻿// Write your JavaScript code.
 
-window.addEventListener('load', function () {
-
-    map.addListener('bounds_changed', function () {
-       
-        console.log("bounds changed");
-
-        console.log(markers.length)
-
-    });
-
- 
-
-});
-
 
 let map = null;
 let latitude = 57.7089;
@@ -214,6 +200,8 @@ function SearchBox() {
                 position: place.geometry.location
             }));
 
+            currentPosition = place.geometry.location;
+
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
                 bounds.union(place.geometry.viewport);
@@ -222,5 +210,6 @@ function SearchBox() {
             }
         });
         map.fitBounds(bounds);
+        nearbySearch(currentPosition);
     });
 }
