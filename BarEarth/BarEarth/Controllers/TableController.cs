@@ -38,16 +38,16 @@ namespace BarEarth.Controllers
                     Bars = Bars.OrderByDescending(b => b.Name).ToList();
                     break;
                 case "Price":
-                    Bars = Bars;
+                    Bars = Bars; //add products first
                     break;
                 case "Price_desc":
-                    Bars = Bars;
+                    Bars = Bars; //add products first
                     break;
                 case "Distance":
-                    Bars = Bars;
+                    Bars = Bars; // adddistance first
                     break;
                 case "Distance_desc":
-                    Bars = Bars;
+                    Bars = Bars; //add distance first
                     break;
                 case "Comment":
                     Bars = Bars.OrderBy(b => b.Ratings.Count()).ToList();
@@ -56,7 +56,10 @@ namespace BarEarth.Controllers
                     Bars = Bars.OrderByDescending(b => b.Ratings.Count()).ToList();
                     break;
                 case "Rating":
-                    Bars = Bars;
+                    Bars = Bars.OrderBy(b => b.Ratings.Where(r => r.Value != null)).ToList();
+                    break;
+                case "Rating_desc":
+                    Bars = Bars.OrderByDescending(b => b.Ratings.All(r => r.Value)).ToList();
                     break;
                 default:
                     break;
