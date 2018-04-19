@@ -7,6 +7,7 @@ let longitude = 11.9746;
 let currentPosition;
 let key = 'AIzaSyCNTmJ9FGN1shynaOZ8niPI3OQLRAUbP4o';
 let markers = [];
+let infoWindow;
 
 
 
@@ -46,6 +47,8 @@ function initMap() {
 
 function createMarkers(places) {
 
+    infowindow = new google.maps.InfoWindow();
+
     markers.forEach(function (marker) {
         marker.setMap(null);
     });
@@ -57,10 +60,7 @@ function createMarkers(places) {
     
         let place = places[i];
 
-        let infowindow = new google.maps.InfoWindow({
-            content: place.name
-        });
-
+       
         let image = {
             url: place.icon,
             size: new google.maps.Size(71, 71),
@@ -77,6 +77,7 @@ function createMarkers(places) {
         });
 
         marker.addListener('click', function () {
+            infowindow.setContent(place.name);
             infowindow.open(map, marker);
         });
 
@@ -94,7 +95,7 @@ function nearbySearch(position) {
     // Perform a nearby search.
     service.nearbySearch({
         location: position,
-        radius: 1500,
+        radius: 50000,
         type: ['bar']
     },
         function (results, status, pagination) {
