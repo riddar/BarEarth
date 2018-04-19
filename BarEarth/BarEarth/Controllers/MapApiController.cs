@@ -30,9 +30,12 @@ namespace BarEarth.Controllers
      
         public JsonResult Get(Bar bar)
         {
-            Bar2.Name = bar.Name;
-            _context.Bars.Add(Bar2);
-            _context.SaveChanges();
+            if (bar != null)
+            {
+                Bar2.Name = bar.Name; 
+                _context.Bars.Add(Bar2);
+                _context.SaveChanges();
+            }
 
             return Json(bar);
         }

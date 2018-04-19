@@ -11,6 +11,7 @@ let infoWindow;
 
 
 
+
 function initMap() {
 
 
@@ -131,6 +132,7 @@ function getPlaceInfo(PlaceId) {
     let url = 'https://maps.googleapis.com/maps/api/place/details/json';
 
     let placeId = PlaceId;
+    let barName;
 
     let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
     console.log('Hämtar data från: ' + finalUrl);
@@ -142,11 +144,17 @@ function getPlaceInfo(PlaceId) {
         .then(obj => {
             console.log('Svaret som objekt: ', obj);
             console.log('Lyckades hämta data');
+            barName = `${obj.result.name}`;
             console.log(obj.result.name)
+            SendData(barName);
         })
         .catch(message => {
             console.log('Något gick fel: ' + message);
         })
+
+    ////form encoded data
+    //let dataType = 'application/x-www-form-urlencoded; charset=utf-8';
+    //let data = $('form').serialize();
 }
 
 function SearchBox() {
@@ -214,25 +222,26 @@ function SearchBox() {
         nearbySearch(currentPosition);
     });
 }
-//form encoded data
-var dataType = 'application/x-www-form-urlencoded; charset=utf-8';
-var data = $('form').serialize();
 
 //JSON data
-var dataType = 'application/json; charset=utf-8';
-var data = {
-   Name: 'BarHimelen',
-}
 
-console.log('Submitting form...');
-$.ajax({
-    type: 'GET',
-    url: '/MapApi/Get',
-    dataType: 'json',
-    contentType: dataType,
-    data: data,
-    success: function (result) {
-        console.log('Data received: ');
-        console.log(result);
+function SendData(barname) {
+
+    let dataType = 'application/json; charset=utf-8';
+    let data = {
+        Name: barname,
     }
-});
+
+    console.log('Submitting form...');
+    $.ajax({
+        type: 'GET',
+        url: '/MapApi/Get',
+        dataType: 'json',
+        contentType: dataType,
+        data: data,
+        success: function (result) {
+            console.log('Data received: ');
+            console.log(result);
+        }
+    });
+}
