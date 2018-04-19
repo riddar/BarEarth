@@ -214,3 +214,25 @@ function SearchBox() {
         nearbySearch(currentPosition);
     });
 }
+//form encoded data
+var dataType = 'application/x-www-form-urlencoded; charset=utf-8';
+var data = $('form').serialize();
+
+//JSON data
+var dataType = 'application/json; charset=utf-8';
+var data = {
+   Name: 'BarHimelen',
+}
+
+console.log('Submitting form...');
+$.ajax({
+    type: 'GET',
+    url: '/MapApi/Get',
+    dataType: 'json',
+    contentType: dataType,
+    data: data,
+    success: function (result) {
+        console.log('Data received: ');
+        console.log(result);
+    }
+});
