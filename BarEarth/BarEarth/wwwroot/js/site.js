@@ -95,7 +95,7 @@ function nearbySearch(position) {
     // Perform a nearby search.
     service.nearbySearch({
         location: position,
-        radius: 1500,
+        radius: 50000,
         type: ['bar']
     },
         function (results, status, pagination) {

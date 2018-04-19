@@ -20,7 +20,6 @@ namespace BarEarth.Models
         public string Review { get; set; }
         [ForeignKey("BarId")]
         public int BarId { get; set; }
-        [ForeignKey("Bar")]
         public Bar Bar { get; set; }
         
     }
