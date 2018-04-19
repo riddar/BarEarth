@@ -133,6 +133,7 @@ function getPlaceInfo(PlaceId) {
 
     let placeId = PlaceId;
     let barName;
+    let barId;
 
     let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
     console.log('Hämtar data från: ' + finalUrl);
@@ -145,8 +146,9 @@ function getPlaceInfo(PlaceId) {
             console.log('Svaret som objekt: ', obj);
             console.log('Lyckades hämta data');
             barName = `${obj.result.name}`;
+            barId = `${obj.result.place_id}`;
             console.log(obj.result.name)
-            SendData(barName);
+            SendData(barName,barId);
         })
         .catch(message => {
             console.log('Något gick fel: ' + message);
@@ -225,11 +227,12 @@ function SearchBox() {
 
 //JSON data
 
-function SendData(barname) {
+function SendData(barname,barId) {
 
     let dataType = 'application/json; charset=utf-8';
     let data = {
         Name: barname,
+        PlaceId: barId
     }
 
     console.log('Submitting form...');

@@ -32,7 +32,8 @@ namespace BarEarth.Controllers
         {
             if (bar != null)
             {
-                Bar2.Name = bar.Name; 
+                Bar2.Name = bar.Name;
+                Bar2.PlaceId = bar.PlaceId;
                 _context.Bars.Add(Bar2);
                 _context.SaveChanges();
             }
