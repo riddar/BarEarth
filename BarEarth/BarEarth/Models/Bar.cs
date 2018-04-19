@@ -15,7 +15,6 @@ namespace BarEarth.Models
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
-        [Required]
         public int AgeRestriction { get; set; }
         [StringLength(160)]
         public string Description { get; set; }
