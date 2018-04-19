@@ -56,10 +56,10 @@ namespace BarEarth.Controllers
                     Bars = Bars.OrderByDescending(b => b.Ratings.Count()).ToList();
                     break;
                 case "Rating":
-                    Bars = Bars.OrderBy(b => b.Ratings.Where(r => r.Value != null)).ToList();
+                    Bars = Bars.OrderBy(b => b.Ratings.Average(rating => rating.Value)).ToList();
                     break;
                 case "Rating_desc":
-                    Bars = Bars.OrderByDescending(b => b.Ratings.All(r => r.Value)).ToList();
+                    Bars = Bars.OrderByDescending(b => b.Ratings.Average(rating => rating.Value)).ToList();
                     break;
                 default:
                     break;

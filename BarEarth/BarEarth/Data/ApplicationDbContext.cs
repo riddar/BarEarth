@@ -29,11 +29,11 @@ namespace BarEarth.Data
             builder.Entity<Bar>().Property(b => b.Description).HasMaxLength(160);
             builder.Entity<Bar>().Property(b => b.Website).HasMaxLength(100);
             builder.Entity<Bar>().Property(b => b.Email).HasMaxLength(255);
-            builder.Entity<Bar>().HasMany(b => b.Ratings).WithOne(b => b.Bar);
+            builder.Entity<Bar>().HasMany(b => b.Ratings).WithOne(r => r.Bar);
 
             //ratings
             builder.Entity<Rating>().HasKey(r => r.Id);
-            builder.Entity<Rating>().HasOne(r => r.Bar).WithMany(r => r.Ratings);
+            builder.Entity<Rating>().HasOne(r => r.Bar).WithMany(b => b.Ratings);
         }
     }
 }
