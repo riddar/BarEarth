@@ -103,7 +103,7 @@ function nearbySearch(position) {
             if (status !== 'OK') return;
 
             createMarkers(results);
-            getPlaceInfo(results[0].place_id);
+            getPlaceInfo(results);
         });
 }
 
@@ -128,31 +128,36 @@ function UpdatePosition(lati, longi) {
     //initMap();
 };
 
-function getPlaceInfo(PlaceId) {
+function getPlaceInfo(Places) {
     let url = 'https://maps.googleapis.com/maps/api/place/details/json';
+    let places = Places;
 
-    let placeId = PlaceId;
-    let barName;
-    let barId;
 
-    let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
-    console.log('Hämtar data från: ' + finalUrl);
-    fetch(finalUrl, { method: 'POST' })
-        .then(response => {
-            console.log('Svar från servern:', response);
-            return response.json();
-        })
-        .then(obj => {
-            console.log('Svaret som objekt: ', obj);
-            console.log('Lyckades hämta data');
-            barName = `${obj.result.name}`;
-            barId = `${obj.result.place_id}`;
-            console.log(obj.result.name)
-            SendData(barName,barId);
-        })
-        .catch(message => {
-            console.log('Något gick fel: ' + message);
-        })
+    for (let i = 0; i < places.length; i++) {
+
+        let placeId = places[i].place_id;
+        let barName;
+        let barId;
+
+        let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
+        console.log('Hämtar data från: ' + finalUrl);
+        fetch(finalUrl, { method: 'POST' })
+            .then(response => {
+                console.log('Svar från servern:', response);
+                return response.json();
+            })
+            .then(obj => {
+                console.log('Svaret som objekt: ', obj);
+                console.log('Lyckades hämta data');
+                barName = `${obj.result.name}`;
+                barId = `${obj.result.place_id}`;
+                console.log(barName)
+                SendData(barName, barId);
+            })
+            .catch(message => {
+                console.log('Något gick fel: ' + message);
+            })
+    }
 
     ////form encoded data
     //let dataType = 'application/x-www-form-urlencoded; charset=utf-8';
