@@ -11,6 +11,7 @@ let infoWindow;
 
 
 
+
 function initMap() {
 
 
@@ -102,7 +103,7 @@ function nearbySearch(position) {
             if (status !== 'OK') return;
 
             createMarkers(results);
-            getPlaceInfo(results[0].place_id);
+            getPlaceInfo(results);
         });
 }
 
@@ -127,26 +128,40 @@ function UpdatePosition(lati, longi) {
     //initMap();
 };
 
-function getPlaceInfo(PlaceId) {
+function getPlaceInfo(Places) {
     let url = 'https://maps.googleapis.com/maps/api/place/details/json';
+    let places = Places;
 
-    let placeId = PlaceId;
 
-    let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
-    console.log('Hämtar data från: ' + finalUrl);
-    fetch(finalUrl, { method: 'POST' })
-        .then(response => {
-            console.log('Svar från servern:', response);
-            return response.json();
-        })
-        .then(obj => {
-            console.log('Svaret som objekt: ', obj);
-            console.log('Lyckades hämta data');
-            console.log(obj.result.name)
-        })
-        .catch(message => {
-            console.log('Något gick fel: ' + message);
-        })
+    for (let i = 0; i < places.length; i++) {
+
+        let placeId = places[i].place_id;
+        let barName;
+        let barId;
+
+        let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
+        console.log('Hämtar data från: ' + finalUrl);
+        fetch(finalUrl, { method: 'POST' })
+            .then(response => {
+                console.log('Svar från servern:', response);
+                return response.json();
+            })
+            .then(obj => {
+                console.log('Svaret som objekt: ', obj);
+                console.log('Lyckades hämta data');
+                barName = `${obj.result.name}`;
+                barId = `${obj.result.place_id}`;
+                console.log(barName)
+                SendData(barName, barId);
+            })
+            .catch(message => {
+                console.log('Något gick fel: ' + message);
+            })
+    }
+
+    ////form encoded data
+    //let dataType = 'application/x-www-form-urlencoded; charset=utf-8';
+    //let data = $('form').serialize();
 }
 
 function SearchBox() {
@@ -212,5 +227,29 @@ function SearchBox() {
         });
         map.fitBounds(bounds);
         nearbySearch(currentPosition);
+    });
+}
+
+//JSON data
+
+function SendData(barname,barId) {
+
+    let dataType = 'application/json; charset=utf-8';
+    let data = {
+        Name: barname,
+        PlaceId: barId
+    }
+
+    console.log('Submitting form...');
+    $.ajax({
+        type: 'GET',
+        url: '/MapApi/Get',
+        dataType: 'json',
+        contentType: dataType,
+        data: data,
+        success: function (result) {
+            console.log('Data received: ');
+            console.log(result);
+        }
     });
 }
