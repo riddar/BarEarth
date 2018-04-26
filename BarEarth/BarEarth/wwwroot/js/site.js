@@ -11,9 +11,7 @@ let infoWindow;
 
 
 
-
 function initMap() {
-
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -39,11 +37,12 @@ function initMap() {
         center: currentPosition,
         zoom: 15
     });
+    
 
     SearchBox();
 
     nearbySearch(currentPosition);
-
+    
 }
 
 function createMarkers(places) {
@@ -125,6 +124,7 @@ function UpdatePosition(lati, longi) {
     if (map)
         map.setCenter({ lat: lati, lng: longi });
 
+    calcRoute(currentPosition);
     //initMap();
 };
 
@@ -250,6 +250,26 @@ function SendData(barname,barId) {
         success: function (result) {
             console.log('Data received: ');
             console.log(result);
+        }
+    });
+}
+
+function calcRoute(currentPosition) {
+   
+    let directionsService = new google.maps.DirectionsService();
+    let directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
+
+
+    let request = {
+        origin: currentPosition,
+        destination: {lat: 57.7082971979, lng:  11.9690895081},
+        travelMode: 'WALKING'
+    };
+    
+    directionsService.route(request, function(response, status) {
+        if (status === 'OK') {
+            directionsDisplay.setDirections(response);
         }
     });
 }
