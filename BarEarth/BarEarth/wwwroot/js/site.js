@@ -79,6 +79,9 @@ function createMarkers(places) {
         marker.addListener('click', function () {
             infowindow.setContent(place.name);
             infowindow.open(map, marker);
+            let latitude = this.position.lat();
+            let longitude = this.position.lng();
+            calcRoute(currentPosition,latitude,longitude)
         });
 
         markers.push(marker);
@@ -95,7 +98,7 @@ function nearbySearch(position) {
     // Perform a nearby search.
     service.nearbySearch({
         location: position,
-        radius: 50000,
+        radius: 1500,
         type: ['bar']
     },
         function (results, status, pagination) {
@@ -248,22 +251,24 @@ function SendData(barname,barId) {
         contentType: dataType,
         data: data,
         success: function (result) {
-            console.log('Data received: ');
-            console.log(result);
+            //console.log('Data received: ');
+            //console.log(result);
         }
     });
 }
 
-function calcRoute(currentPosition) {
+function calcRoute(currentPosition, lati, longi) {
    
     let directionsService = new google.maps.DirectionsService();
     let directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
 
+    let destination1 = { lat: lati, lng: longi };
+
 
     let request = {
         origin: currentPosition,
-        destination: {lat: 57.7082971979, lng:  11.9690895081},
+        destination: destination1,
         travelMode: 'WALKING'
     };
     
