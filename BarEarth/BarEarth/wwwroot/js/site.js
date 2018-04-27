@@ -34,7 +34,9 @@ function initMap() {
 
     SearchBox();
 
-    nearbySearch(currentPosition);
+    let service = new google.maps.places.PlacesService(map);
+
+    nearbySearch(currentPosition,service);
     
 }
 
@@ -85,9 +87,9 @@ function createMarkers(places) {
     console.log(markers.length)
 }
 
-function nearbySearch(position) {
+function nearbySearch(position, service) {
 
-    let service = new google.maps.places.PlacesService(map);
+    
     let getNextPage = null;
 
     // Perform a nearby search.
@@ -107,11 +109,13 @@ function UpdatePosition(lati, longi) {
     longitude = longi;
     latitude = lati;
 
+    let service = new google.maps.places.PlacesService(map);
+
     currentPosition = {
         lat: lati,
         lng: longi
     };
-    nearbySearch(currentPosition);
+    nearbySearch(currentPosition, service);
 
     let marker = new google.maps.Marker({
         map: map,
@@ -222,7 +226,9 @@ function SearchBox() {
             }
         });
         map.fitBounds(bounds);
-        nearbySearch(currentPosition);
+
+        let service = new google.maps.places.PlacesService(map);
+        nearbySearch(currentPosition, service);
     });
 }
 //JSON data
@@ -242,19 +248,17 @@ function SendData(barname,barId) {
         contentType: dataType,
         data: data,
         success: function (result) {
-            //console.log('Data received: ');
-            //console.log(result);
+            console.log('Data received: ');
+            console.log(result);
         }
     });
 }
 
 function calcRoute(currentPosition, lati, longi, dirService,dirDisplay) {
 
-   
     dirDisplay.setMap(map);
 
     let destination1 = { lat: lati, lng: longi };
-
 
     let request = {
         origin: currentPosition,
