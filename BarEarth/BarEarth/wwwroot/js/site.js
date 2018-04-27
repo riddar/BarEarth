@@ -1,6 +1,4 @@
 ﻿// Write your JavaScript code.
-
-
 let map = null;
 let latitude = 57.7089;
 let longitude = 11.9746;
@@ -9,9 +7,8 @@ let key = 'AIzaSyCNTmJ9FGN1shynaOZ8niPI3OQLRAUbP4o';
 let markers = [];
 let infoWindow;
 
-
-
 function initMap() {
+
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -22,10 +19,6 @@ function initMap() {
     else {
         console.log("couldn't get position");
     }
-
-
-
-
     currentPosition = {
         lat: latitude,
         lng: longitude
@@ -48,6 +41,8 @@ function initMap() {
 function createMarkers(places) {
 
     infowindow = new google.maps.InfoWindow();
+    let directionsDisplay = new google.maps.DirectionsRenderer();
+    let directionsService = new google.maps.DirectionsService();
 
     markers.forEach(function (marker) {
         marker.setMap(null);
@@ -81,7 +76,7 @@ function createMarkers(places) {
             infowindow.open(map, marker);
             let latitude = this.position.lat();
             let longitude = this.position.lng();
-            calcRoute(currentPosition,latitude,longitude)
+            calcRoute(currentPosition,latitude,longitude, directionsService,directionsDisplay)
         });
 
         markers.push(marker);
@@ -108,7 +103,6 @@ function nearbySearch(position) {
             getPlaceInfo(results);
         });
 }
-
 function UpdatePosition(lati, longi) {
     longitude = longi;
     latitude = lati;
@@ -134,7 +128,6 @@ function UpdatePosition(lati, longi) {
 function getPlaceInfo(Places) {
     let url = 'https://maps.googleapis.com/maps/api/place/details/json';
     let places = Places;
-
 
     for (let i = 0; i < places.length; i++) {
 
@@ -232,9 +225,7 @@ function SearchBox() {
         nearbySearch(currentPosition);
     });
 }
-
 //JSON data
-
 function SendData(barname,barId) {
 
     let dataType = 'application/json; charset=utf-8';
@@ -257,11 +248,10 @@ function SendData(barname,barId) {
     });
 }
 
-function calcRoute(currentPosition, lati, longi) {
+function calcRoute(currentPosition, lati, longi, dirService,dirDisplay) {
+
    
-    let directionsService = new google.maps.DirectionsService();
-    let directionsDisplay = new google.maps.DirectionsRenderer();
-    directionsDisplay.setMap(map);
+    dirDisplay.setMap(map);
 
     let destination1 = { lat: lati, lng: longi };
 
@@ -272,9 +262,9 @@ function calcRoute(currentPosition, lati, longi) {
         travelMode: 'WALKING'
     };
     
-    directionsService.route(request, function(response, status) {
+    dirService.route(request, function(response, status) {
         if (status === 'OK') {
-            directionsDisplay.setDirections(response);
+            dirDisplay.setDirections(response);
         }
     });
 }
