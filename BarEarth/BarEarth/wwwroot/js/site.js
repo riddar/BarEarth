@@ -9,7 +9,6 @@ let infoWindow;
 
 function initMap() {
 
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
 
@@ -30,14 +29,11 @@ function initMap() {
         center: currentPosition,
         zoom: 15
     });
-    
-
     SearchBox();
 
     let service = new google.maps.places.PlacesService(map);
 
     nearbySearch(currentPosition,service);
-    
 }
 
 function createMarkers(places) {
@@ -52,12 +48,10 @@ function createMarkers(places) {
 
     markers = [];
 
-    for (let i = 0; i<places.length; i++) {
+    for (let i = 0; i < places.length; i++) {
 
-    
         let place = places[i];
 
-       
         let image = {
             url: place.icon,
             size: new google.maps.Size(71, 71),
