@@ -3,7 +3,7 @@ let map = null;
 let latitude = 57.7089;
 let longitude = 11.9746;
 let currentPosition;
-let key = 'AIzaSyCNTmJ9FGN1shynaOZ8niPI3OQLRAUbP4o';
+let key = 'AIzaSyBXqGMybRiPHnWLdwBQ7ubymS7lQg8dIj0';
 let markers = [];
 let infoWindow;
 
@@ -119,7 +119,6 @@ function UpdatePosition(lati, longi) {
     if (map)
         map.setCenter({ lat: lati, lng: longi });
 
-    calcRoute(currentPosition);
     //initMap();
 };
 
