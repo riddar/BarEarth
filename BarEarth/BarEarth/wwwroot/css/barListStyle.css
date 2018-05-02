@@ -1,0 +1,19 @@
+﻿body {
+   
+}
+
+
+#bars {
+    background-color: black;
+    color: white;
+}
+.description {
+   vertical-align:bottom;
+}
+.descriptionText {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: large;
+}
+
