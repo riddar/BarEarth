@@ -3,12 +3,11 @@ let map = null;
 let latitude = 57.7089;
 let longitude = 11.9746;
 let currentPosition;
-let key = 'AIzaSyCNTmJ9FGN1shynaOZ8niPI3OQLRAUbP4o';
+let key = 'AIzaSyBXqGMybRiPHnWLdwBQ7ubymS7lQg8dIj0';
 let markers = [];
 let infoWindow;
 
 function initMap() {
-
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -30,12 +29,11 @@ function initMap() {
         center: currentPosition,
         zoom: 15
     });
-    
-
     SearchBox();
 
-    nearbySearch(currentPosition);
-    
+    let service = new google.maps.places.PlacesService(map);
+
+    nearbySearch(currentPosition,service);
 }
 
 function createMarkers(places) {
@@ -50,12 +48,10 @@ function createMarkers(places) {
 
     markers = [];
 
-    for (let i = 0; i<places.length; i++) {
+    for (let i = 0; i < places.length; i++) {
 
-    
         let place = places[i];
 
-       
         let image = {
             url: place.icon,
             size: new google.maps.Size(71, 71),
@@ -85,9 +81,9 @@ function createMarkers(places) {
     console.log(markers.length)
 }
 
-function nearbySearch(position) {
+function nearbySearch(position, service) {
 
-    let service = new google.maps.places.PlacesService(map);
+    
     let getNextPage = null;
 
     // Perform a nearby search.
@@ -107,11 +103,13 @@ function UpdatePosition(lati, longi) {
     longitude = longi;
     latitude = lati;
 
+    let service = new google.maps.places.PlacesService(map);
+
     currentPosition = {
         lat: lati,
         lng: longi
     };
-    nearbySearch(currentPosition);
+    nearbySearch(currentPosition, service);
 
     let marker = new google.maps.Marker({
         map: map,
@@ -121,7 +119,6 @@ function UpdatePosition(lati, longi) {
     if (map)
         map.setCenter({ lat: lati, lng: longi });
 
-    calcRoute(currentPosition);
     //initMap();
 };
 
@@ -222,7 +219,9 @@ function SearchBox() {
             }
         });
         map.fitBounds(bounds);
-        nearbySearch(currentPosition);
+
+        let service = new google.maps.places.PlacesService(map);
+        nearbySearch(currentPosition, service);
     });
 }
 //JSON data
@@ -242,19 +241,17 @@ function SendData(barname,barId) {
         contentType: dataType,
         data: data,
         success: function (result) {
-            //console.log('Data received: ');
-            //console.log(result);
+            console.log('Data received: ');
+            console.log(result);
         }
     });
 }
 
 function calcRoute(currentPosition, lati, longi, dirService,dirDisplay) {
 
-   
     dirDisplay.setMap(map);
 
     let destination1 = { lat: lati, lng: longi };
-
 
     let request = {
         origin: currentPosition,
