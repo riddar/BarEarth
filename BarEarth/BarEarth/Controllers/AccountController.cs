@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using BarEarth.Models;
 using BarEarth.Models.AccountViewModels;
 using BarEarth.Services;
+using BarEarth.Utility;
 
 namespace BarEarth.Controllers
 {
@@ -22,12 +23,14 @@ namespace BarEarth.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger)
         {
@@ -35,6 +38,7 @@ namespace BarEarth.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -224,6 +228,31 @@ namespace BarEarth.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if (!await _roleManager.RoleExistsAsync(StaticDetails.CustomerEndUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.CustomerEndUser));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(StaticDetails.BarAdminEndUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.BarAdminEndUser));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(StaticDetails.AdminEndUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminEndUser));
+                    }
+
+                    if (model.isAdmin)
+                    {
+                        await _userManager.AddToRoleAsync(user, StaticDetails.AdminEndUser);
+                    }
+                    if (model.isBarAdmin)
+                    {
+                        await _userManager.AddToRoleAsync(user, StaticDetails.BarAdminEndUser);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, StaticDetails.CustomerEndUser);
+                    }
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

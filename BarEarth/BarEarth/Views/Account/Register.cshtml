@@ -1,4 +1,5 @@
-﻿@model RegisterViewModel
+﻿@using BarEarth.Utility
+@model RegisterViewModel
 @{
     ViewData["Title"] = "Register";
 }
@@ -26,7 +27,25 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-default">Register</button>
+            @if (User.IsInRole(StaticDetails.AdminEndUser))
+            {
+                <div class="form-group">
+                    <label asp-for="isBarAdmin"></label>
+                    <input asp-for="isBarAdmin" type="checkbox" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="isAdmin"></label>
+                    <input asp-for="isAdmin" type="checkbox" />
+                </div>
+            }
+            @if (User.IsInRole((StaticDetails.AdminEndUser)))
+            {
+                <button type="submit" class="btn btn-default">Add Admin</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-default">Register</button>
+            }
         </form>
     </div>
 </div>
