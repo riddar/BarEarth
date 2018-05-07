@@ -20,24 +20,24 @@ namespace BarEarth.Controllers
         }
 
         //public void ReceiveBarData(? data)
-
         // GET: api/MapApi
-
-
         // GET: api/MapApi/5
 
         Bar Bar2 = new Bar();
      
         public JsonResult Get(Bar bar)
         {
-            if (bar != null)
+            var existingBar = _context.Bars.Where(v => v.PlaceId == bar.PlaceId);
+
+            var count = existingBar.Count();
+
+            if (count==0)
             {
                 Bar2.Name = bar.Name;
                 Bar2.PlaceId = bar.PlaceId;
                 _context.Bars.Add(Bar2);
                 _context.SaveChanges();
             }
-
             return Json(bar);
         }
         
