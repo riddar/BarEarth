@@ -2,21 +2,23 @@
 @inject BarEarth.Data.ApplicationDbContext context;
 @{ViewData["Title"] = "Address";}
 
-<h1>BarEarth</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
+
+
+<div class="card" style="width: 18rem; background-color: #fff; margin:auto; margin-top: 20vh;">
+    <div class="bard-body" style="padding:16px">
         <form asp-action="Index" asp-controller="Index">
-            <div asp-validation-summary="ModelOnly" class="text-danger" />
             <div class="form-group">
-                <label>Address</label>
-                <input asp-for="PlaceId" class="control-label"/>
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="form-group">
+                    <!-- left unspecified, .bmd-form-group will be automatically added (inspect the code) -->
+                    <label for="formGroupExampleInput" class="bmd-label-floating">Namn, address, etc.</label>
+                    <input type="text" class="form-control control-label" asp-for="PlaceId" id="formGroupExampleInput" />
+                </div>
+
             </div>
-            <div class="form-group">
-                <input type="submit" value="Map" asp-action="IndexMapPost" class="btn btn-default" />
-                <input type="submit" value="Table" asp-action="IndexTablePost" class="btn btn-default" />
-            </div>
+            <button type="submit" asp-action="IndexMapPost" class="btn btn-raised btn-dark">Table</button>
+            <button type="submit" asp-action="IndexTablePost" class="btn btn-raised btn-dark">Maps</button>
+            <button type="button" class="btn btn-dark"><i class="material-icons">place</i></button>
         </form>
     </div>
 </div>

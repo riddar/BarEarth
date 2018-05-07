@@ -6,49 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BarEarth</title>
-    <style>
-        body {
-            font-family: "Lato", sans-serif;
-        }
-
-        .sidenav {
-            height: 100%;
-            width: 300px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-            .sidenav a {
-                padding: 8px 8px 8px 32px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-                transition: 0.3s;
-            }
-
-                .sidenav a:hover {
-                    color: #f1f1f1;
-                }
-
-            .sidenav .closebtn {
-                position: absolute;
-                top: 0;
-                right: 25px;
-                font-size: 36px;
-                margin-left: 50px;
-            }
-    </style>
+    
 
     <environment include="Development">
-
-        <link rel="stylesheet" href="~/css/site.css" />
+        <!--<link rel="stylesheet" href="~/css/site.css" />-->
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -62,14 +23,14 @@
 
 
     
-    <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+    <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay" style="height: 100vh;">
         <!--Header Begins-->
         <header class="bmd-layout-header" style="background-color:#0069C0">
             <div class="navbar navbar-ligth bg-faded">
                 <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2">
                     <i class="material-icons">menu</i>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><h2>BarEarth</h2></a>
+                <button asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-dark"><h2>BarEarth</h2></button>
                 <div class="order-3 ">@await Html.PartialAsync("_LoginPartial")</div>
             </div>
         </header>
