@@ -38,7 +38,10 @@ function initMap() {
 
 function createMarkers(places) {
 
+
     infowindow = new google.maps.InfoWindow();
+    
+
     let directionsDisplay = new google.maps.DirectionsRenderer();
     let directionsService = new google.maps.DirectionsService();
 
@@ -68,17 +71,20 @@ function createMarkers(places) {
         });
 
         marker.addListener('click', function () {
-            infowindow.setContent(place.name);
-            infowindow.open(map, marker);
             let latitude = this.position.lat();
             let longitude = this.position.lng();
-            calcRoute(currentPosition,latitude,longitude, directionsService,directionsDisplay)
+            infowindow.setContent(place.name +
+                '<br />' +
+                '<div><button type="button" class="btn btn-success" id="btnDirection">Direction</button> </div>');
+            infowindow.open(map, marker);
+            $('#btnDirection').bind('click', function () {
+                calcRoute(currentPosition, latitude, longitude, directionsService, directionsDisplay);
+            }); 
         });
-
         markers.push(marker);
 
     }
-    console.log(markers.length)
+    console.log(markers.length);
 }
 
 function nearbySearch(position, service) {
