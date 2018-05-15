@@ -12,15 +12,14 @@ namespace BarEarth.Models
     [Authorize]
     public class Rating
     {
-        [Key]
         public int Id { get; set; }
-        [MaxLength(5)]
+        public int BarId { get; set; }
+
         public int Rate { get; set; }
-        [StringLength(160)]
         public string Review { get; set; }
-        [ForeignKey("BarId")]
-        public Bar Bar { get; set; }
         public string UserName { get; set; }
+
+        public Bar Bar { get; set; }
         
     }
 }

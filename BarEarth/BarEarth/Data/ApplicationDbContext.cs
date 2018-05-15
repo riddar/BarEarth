@@ -22,18 +22,24 @@ namespace BarEarth.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
-            //bar
+            // Bar
             builder.Entity<Bar>().HasKey(b => b.Id);
+            builder.Entity<Bar>().Property(b => b.Id).IsRequired();
             builder.Entity<Bar>().Property(b => b.Name).IsRequired().HasMaxLength(50);
             builder.Entity<Bar>().Property(b => b.AgeRestriction).IsRequired();
-            builder.Entity<Bar>().Property(b => b.Description).HasMaxLength(160);
+            builder.Entity<Bar>().Property(b => b.Description).HasMaxLength(500);
             builder.Entity<Bar>().Property(b => b.Website).HasMaxLength(100);
-            builder.Entity<Bar>().Property(b => b.Email).HasMaxLength(255);
-            builder.Entity<Bar>().HasMany(b => b.Ratings).WithOne(r => r.Bar);
+            builder.Entity<Bar>().Property(b => b.Email).HasMaxLength(100);
+ 
 
-            //ratings
+            // Rating
             builder.Entity<Rating>().HasKey(r => r.Id);
-            builder.Entity<Rating>().HasOne(r => r.Bar).WithMany(b => b.Ratings);
+            builder.Entity<Rating>().Property(r => r.Id).IsRequired();
+
+            // Relations
+            builder.Entity<Rating>().HasOne(r => r.Bar)
+                .WithMany(b => b.Ratings)
+                .HasForeignKey(r => r.BarId);
         }
     }
 }
