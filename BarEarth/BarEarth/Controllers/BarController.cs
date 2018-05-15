@@ -26,6 +26,8 @@ namespace BarEarth.Controllers
                 return View() ;
             }
             Bar Bar = context.Bars.FirstOrDefault(b => b.Id==id);
+
+            
             if (Bar == null)
             {
                 return View();
@@ -38,7 +40,7 @@ namespace BarEarth.Controllers
             var ratings = context.Ratings.Where(d => d.Bar.Id==id).ToList();
             if (ratings.Count() > 0)
             {
-                var ratingSum = ratings.Sum(d => d.Rate);
+                var ratingSum = ratings.Select(d => d.Rate).Sum();
                 ViewBag.RatingSum = ratingSum;
                 var ratingCount = ratings.Count();
                 ViewBag.RatingCount = ratingCount;
