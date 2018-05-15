@@ -1,21 +1,37 @@
 ﻿@model IEnumerable<BarEarth.Models.Bar>
 @inject BarEarth.Data.ApplicationDbContext context;
-@{ViewData["Title"] = "Bars";}
+@{ViewData["Title"] = "Bars";
+
+}
+<!-- Material Design for Bootstrap fonts and icons -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+<!-- Material Design for Bootstrap CSS -->
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+
 
 <link rel="stylesheet" href="~/css/barListStyle.css" a />
 
 
 
-<div class="container-fluid">
-    <div class="row justify-content-md-center no-gutters">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-2 m-4 pb-5 " id="bars">
-                <div> <img src="~/images/barpicexample.jpg" alt="BarPic" class="img-fluid" /></div>
-                <div class="description">
-                <p class="descriptionText">@Html.DisplayFor(modelItem => item.Name)</p>
+
+
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3 mb-3 mt-3">
+            <div class="card" style="width: 17rem;">
+                <img class="card-img-top" src="~/images/barpicexample.jpg" alt="Card image">
+                <div class="card-body">
+                    <h4 class="card-title">@item.Name</h4>
+                    @*<p class="card-text">Some example text.</p>
+                    <a href="#" class="btn btn-primary">See details</a>*@
                 </div>
             </div>
-        }
-    </div>
+        </div>
+    }
+
 </div>
+

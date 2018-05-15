@@ -14,12 +14,13 @@ namespace BarEarth.Models
     {
         [Key]
         public int Id { get; set; }
-        [MaxLength(10)]
-        public int Value { get; set; }
+        [MaxLength(5)]
+        public int Rate { get; set; }
         [StringLength(160)]
         public string Review { get; set; }
         [ForeignKey("BarId")]
         public Bar Bar { get; set; }
+        public string UserName { get; set; }
         
     }
 }

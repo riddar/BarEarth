@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace BarEarth.Controllers
@@ -17,18 +18,38 @@ namespace BarEarth.Controllers
             context = _context;
         }
 
-        [HttpGet, ActionName("Bar")]
-        public IActionResult BarGet(Bar bar)
+       [Route("Bar/details")]
+        public ActionResult Details(int? id)
         {
-            if (BarExists(bar.Id))
-                return NotFound();
+            if (id == null)
+            {
+                return View() ;
+            }
+            Bar Bar = context.Bars.FirstOrDefault(b => b.Id==id);
+            if (Bar == null)
+            {
+                return View();
+            }
+            ViewBag.BarId = id.Value;
 
-            return View(bar);
-        }
+            var comments = context.Ratings.Where(d => d.Bar.Id==id).ToList();
+            ViewBag.comments = comments;
 
-        private bool BarExists(int id)
-        {
-            return context.Bars.Any(b => b.Id == id);
+            var ratings = context.Ratings.Where(d => d.Bar.Id==id).ToList();
+            if (ratings.Count() > 0)
+            {
+                var ratingSum = ratings.Sum(d => d.Rate);
+                ViewBag.RatingSum = ratingSum;
+                var ratingCount = ratings.Count();
+                ViewBag.RatingCount = ratingCount;
+            }
+            else
+            {
+                ViewBag.RatingSum = 0;
+                ViewBag.RatingCount = 0;
+            }
+
+            return View(Bar);
         }
     }
 }

@@ -11,9 +11,10 @@ using System;
 namespace BarEarth.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180515115033_add-migration addedusename")]
+    partial class addmigrationaddedusename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,13 +114,13 @@ namespace BarEarth.Data.Migrations
 
                     b.Property<int?>("BarId");
 
-                    b.Property<int>("Rate")
-                        .HasMaxLength(5);
-
                     b.Property<string>("Review")
                         .HasMaxLength(160);
 
                     b.Property<string>("UserName");
+
+                    b.Property<int>("Value")
+                        .HasMaxLength(5);
 
                     b.HasKey("Id");
 

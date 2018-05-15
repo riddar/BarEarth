@@ -3,6 +3,9 @@
 }
 
 
+.my-card__media {
+    background-image: url("../images/barpicexample.jpg");
+}
 #bars {
     background-color: black;
     color: white;
