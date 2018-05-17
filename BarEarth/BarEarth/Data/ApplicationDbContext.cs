@@ -13,6 +13,7 @@ namespace BarEarth.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Bar> Bars { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Product> Products { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -34,6 +35,12 @@ namespace BarEarth.Data
             //ratings
             builder.Entity<Rating>().HasKey(r => r.Id);
             builder.Entity<Rating>().HasOne(r => r.Bar).WithMany(b => b.Ratings);
+
+            //products
+            builder.Entity<Product>().HasKey(p => p.Id);
+            builder.Entity<Product>().Property(p => p.Name).IsRequired().HasMaxLength(50);
+            builder.Entity<Product>().Property(p => p.Price).IsRequired();
+            builder.Entity<Product>().HasOne(p => p.Bar).WithMany(b => b.Products);
         }
     }
 }

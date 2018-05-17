@@ -30,5 +30,6 @@ namespace BarEarth.Models
         public string Latitude { get; set; }
 
         public virtual IList<Rating> Ratings { get; set; }
+        public virtual IList<Product> Products { get; set; }
     }
 }

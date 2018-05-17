@@ -18,37 +18,46 @@ namespace BarEarth.Controllers
             context = _context;
         }
 
-        [HttpGet]
-        public IActionResult Product()
+        [HttpGet, ActionName("Products")]
+        public async Task<IActionResult> ProductsGet(string sortOrder)
         {
-            return View();
-        }
+            var products = await context.Products.ToListAsync();
 
-        [HttpGet]
-        public async Task<IActionResult> AddProduct(Bar _bar)
-        {
-            if (_bar == null)
-                return NotFound();
+            ViewBag.BarName = sortOrder == "Name" ? "Name_desc" : "Name";
+            ViewBag.Price = sortOrder == "Price" ? "Price_desc" : "Price";
+            ViewBag.Type = sortOrder == "Type" ? "Type_desc" : "Type";
+            ViewBag.SubType = sortOrder == "SubType" ? "SubType_desc" : "SubType";
 
-            var bar = await context.Bars
-                .Include(b => b.Ratings)
-                .Where(b => b.Id == _bar.Id)
-                .FirstOrDefaultAsync();
-
-            if (bar == null)
-                return NotFound();
-
-            return View(bar);
-        }
-
-        [HttpPost, ActionName("AddProduct")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddProductPost(Product product)
-        {
-            if (product == null)
-                return NotFound();
-
-            
+            switch (sortOrder)
+            {
+                case "Name":
+                    products = products.OrderBy(p => p.Name).ToList();
+                    break;
+                case "Name_desc":
+                    products = products.OrderByDescending(p => p.Name).ToList();
+                    break;
+                case "Price":
+                    products = products.OrderBy(p => p.Price).ToList();
+                    break;
+                case "Price_desc":
+                    products = products.OrderByDescending(p => p.Price).ToList();
+                    break;
+                case "Type":
+                    products = products.OrderBy(p => p.Type).ToList();
+                    break;
+                case "Type_desc":
+                    products = products.OrderByDescending(p => p.Type).ToList();
+                    break;
+                case "SubType":
+                    products = products.OrderBy(p => p.SubType).ToList();
+                    break;
+                case "SubType_desc":
+                    products = products.OrderByDescending(p => p.SubType).ToList();
+                    break;
+                default:
+                    break;
+            }
+            return View(products);
         }
 
     }
