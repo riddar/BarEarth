@@ -1,6 +1,7 @@
 ﻿using BarEarth.Data;
 using BarEarth.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace BarEarth.Controllers
     public class BarController: Controller
     {
         private readonly ApplicationDbContext context;
+        private UserManager<ApplicationUser> userManager;
 
-        public BarController(ApplicationDbContext _context)
+        public BarController(ApplicationDbContext _context, UserManager<ApplicationUser> manager)
         {
             context = _context;
+            userManager = manager;
         }
 
        [Route("Bar/details")]
@@ -67,8 +70,9 @@ namespace BarEarth.Controllers
                BarId = barId,
                 Review = review,
                 Rate = rating,
-                DateTime = DateTime.Now
-            };
+                DateTime = DateTime.Now,
+                UserName = userManager.GetUserName(HttpContext.User)
+        };
 
             context.Ratings.Add(barComment);
             context.SaveChanges();

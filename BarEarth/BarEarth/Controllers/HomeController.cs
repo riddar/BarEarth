@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BarEarth.Models;
 using BarEarth.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace BarEarth.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext context;
+   
 
         public HomeController(ApplicationDbContext _context)
         {
