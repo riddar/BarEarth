@@ -3,10 +3,15 @@ let map = null;
 let latitude = 57.7089;
 let longitude = 11.9746;
 let currentPosition;
-let key = 'AIzaSyBXqGMybRiPHnWLdwBQ7ubymS7lQg8dIj0';
+let key = 'AIzaSyD4nV1sw-I7t74JHMhwkprurMSzM_WB_V8';
 let markers = [];
 let infoWindow;
+let barPosition;
+let directionsDisplay;
+let directionsService;
+
 console.log('SITE.JS!!!');
+
 function initMap() {
 
     if (navigator.geolocation) {
@@ -42,8 +47,8 @@ function createMarkers(places) {
     infowindow = new google.maps.InfoWindow();
     
 
-    let directionsDisplay = new google.maps.DirectionsRenderer();
-    let directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsService = new google.maps.DirectionsService();
 
     markers.forEach(function (marker) {
         marker.setMap(null);
@@ -165,6 +170,8 @@ function getPlaceInfo(Places) {
 
 function SearchBox() {
 
+    directionsDisplay = new google.maps.DirectionsRenderer();
+
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
@@ -191,7 +198,7 @@ function SearchBox() {
             marker.setMap(null);
         });
         markers = [];
-
+        
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function (place) {
@@ -215,7 +222,7 @@ function SearchBox() {
                 position: place.geometry.location
             }));
 
-            currentPosition = place.geometry.location;
+            barPosition = place.geometry.location;
 
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
@@ -223,11 +230,13 @@ function SearchBox() {
             } else {
                 bounds.extend(place.geometry.location);
             }
+
+            directionsDisplay.setMap(null);
         });
         map.fitBounds(bounds);
 
         let service = new google.maps.places.PlacesService(map);
-        nearbySearch(currentPosition, service);
+        nearbySearch(barPosition, service);
     });
 }
 //JSON data
