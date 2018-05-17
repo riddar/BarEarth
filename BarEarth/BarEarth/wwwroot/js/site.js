@@ -6,7 +6,7 @@ let currentPosition;
 let key = 'AIzaSyBXqGMybRiPHnWLdwBQ7ubymS7lQg8dIj0';
 let markers = [];
 let infoWindow;
-
+console.log('SITE.JS!!!');
 function initMap() {
 
     if (navigator.geolocation) {

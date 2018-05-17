@@ -18,6 +18,7 @@ namespace BarEarth.Models
         public int Rate { get; set; }
         public string Review { get; set; }
         public string UserName { get; set; }
+        public DateTime DateTime { get; set; }
 
         public Bar Bar { get; set; }
         

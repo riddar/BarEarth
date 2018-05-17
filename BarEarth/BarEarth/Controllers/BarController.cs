@@ -1,5 +1,6 @@
 ﻿using BarEarth.Data;
 using BarEarth.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace BarEarth.Controllers
             ViewBag.BarId = id.Value;
 
             var comments = context.Ratings.Where(d => d.Bar.Id==id).ToList();
-            ViewBag.comments = comments;
+            ViewBag.Comments = comments;
 
             var ratings = context.Ratings.Where(d => d.Bar.Id==id).ToList();
             if (ratings.Count() > 0)
@@ -52,6 +53,27 @@ namespace BarEarth.Controllers
             }
 
             return View(Bar);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(IFormCollection form)
+        {
+            var review = form["Comment"].ToString();
+            var barId = int.Parse(form["BarId"]);
+            var rating = int.Parse(form["Rating"]);
+
+            Rating barComment = new Rating()
+            {
+               BarId = barId,
+                Review = review,
+                Rate = rating,
+                DateTime = DateTime.Now
+            };
+
+            context.Ratings.Add(barComment);
+            context.SaveChanges();
+
+            return RedirectToAction("Details", new { id = barId });
         }
     }
 }
