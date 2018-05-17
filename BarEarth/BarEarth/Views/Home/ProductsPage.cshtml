@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BarEarth.Models.Product>
+@inject BarEarth.Data.ApplicationDbContext context;
+@{ViewData["Title"] = "Products";}
+
+
+<div class="glyphicon-apple"/><h2>Meny</h2><div class="glyphicon-apple" />
+
+<form asp-controller="ProductController" asp-action="ProductsGet">
+    <table class="table">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink("Name", "ProductsPage", new { sortOrder = ViewBag.Name })</th>
+            <th>@Html.ActionLink("Type", "ProductsPage", new { sortOrder = ViewBag.Type })</th>
+            <th>@Html.ActionLink("SubType", "ProductsPage", new { sortOrder = ViewBag.SubType })</th>
+            <th>@Html.ActionLink("Price", "ProductsPage", new { sortOrder = ViewBag.Price })</th>
+        </tr>
+    </thead>
+    <tbody class="bookable">
+        @foreach (var item in Model)
+        {
+            if (item == null)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+</form>
