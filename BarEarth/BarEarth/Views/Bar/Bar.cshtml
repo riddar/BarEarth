@@ -40,8 +40,38 @@
     </div>
     <div class="card-body">
         <!--Put map in here-->
-        <div>
-            <img class="" src="http://images.indianexpress.com/2017/05/google-maps-759.jpg" />
+        <div class="row">
+            <div class="col-4">
+                <p>
+                    Lorem ipsum dolor sit amet, ei vix putent labores adipiscing. Cu cum partem reprimique. Solum consul delenit ex nam, harum solet an eos, harum assentior adipiscing vis ne. Cu eirmod repudiandae his, ad nec eripuit nusquam cotidieque, nam ei vide soluta expetendis.
+                </p>
+                <table class="table">
+                    <tbody>
+                        <tr id="BarAddress">
+                            <th scope="row"><i class="material-icons">place</i></th>
+                            <td>Insert Address here</td>
+                        </tr>
+                        <tr id="BarOpenTimes">
+                            <th scope="row"><i class="material-icons">schedule</i></th>
+                            <td>
+                                Öppet nu: 11-00
+                            </td>
+                        </tr>
+                        <tr id="BarWebsite">
+                            <th scope="row"><i class="material-icons">public</i></th>
+                            <td>Insert website here</td>
+                        </tr>
+                        <tr id="BarPhone">
+                            <th scope="row"><i class="material-icons">local_phone</i></th>
+                            <td>Insert phone here</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-8">
+                <img class="w-100" src="http://images.indianexpress.com/2017/05/google-maps-759.jpg" />
+            </div>
+            
         </div>
 
         <hr />
@@ -80,6 +110,7 @@
                 <span class="bmd-help">Will we put text here?</span>
             </div>
             <button class="btn btn-default">Cancel</button>
+
             <button type="submit" class="btn btn-primary btn-raised">Submit</button>*@
 
         @Html.Partial("_CommentBox")
@@ -91,7 +122,7 @@
 
         @foreach (var c in lastThreeComments)
         {
-
+            <form>
             <div class="card-columns card-group">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
@@ -117,26 +148,97 @@
                         <div class="card-footer">
                             <p class="card-text"><small class="text-muted">@c.DateTime</small></p>
                         </div>
-                    </div>
-                </div>
-            </div>
+
+            <button type="submit" class="btn btn-primary btn-raised">Submit</button>
+        </form>
+
+        <form>
+            <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Datum(Nyast-Äldst)
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Datum(Äldst-Nyast)
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Betyg(Bäst-Lägst)
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Betyg(Lägst-Bäst)
+            </label>
+        </form>
+
+     
 
         }
         <!--Here is all comments and reviews-->
 
 
+            <div id="collapseComments" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
 
-        <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-deck">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Sven Svensson</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                4,3 •
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star_half</i>
+                                <i class="material-icons">star_border</i>
+                            </h6>
+                            <p class="card-text">Lorem ipsum dolor sit amet, ei vix putent labores adipiscing. Cu cum partem reprimique. Solum consul delenit ex nam, harum solet an eos, harum assentior adipiscing vis ne. Cu eirmod repudiandae his, ad nec eripuit nusquam cotidieque, nam ei vide soluta expetendis.</p>
+                            <div class="card-footer">
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Sven Svensson</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                4,3 •
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star_half</i>
+                                <i class="material-icons">star_border</i>
+                            </h6>
+                            <p class="card-text">Ex vix viris reprimique, no eum delectus assueverit. Nemore perfecto id vim, zril suscipiantur vix ex. Eu vitae persius elaboraret usu, per mucius invidunt et. Nam an ludus posidonium delicatissimi, mea sint suscipiantur ad, at tollit omnesque postulant sed. In has nullam possim doctus, oportere volutpat democritum duo ei, mea quis euismod salutandi no.</p>
+                            <div class="card-footer">
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
 
-        </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Sven Svensson</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                4,3 •
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star</i>
+                                <i class="material-icons">star_half</i>
+                                <i class="material-icons">star_border</i>
+                            </h6>
+                            <p class="card-text">Oporteat euripidis vituperatoribus ex eos. In vis velit euismod tibique. Ne per graeci facilisi mnesarchum. An dolore alienum quaestio vim.</p>
+                            <div class="card-footer">
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
 
         <div class="card-header nav justify-content-center" id="CommentSection">
-            <button class="btn btn-link nav-item" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+
+            <button class="btn btn-link nav-item" data-toggle="collapse" data-target="#collapseComments" aria-expanded="true" aria-controls="collapseComments">
                 <i class="material-icons">keyboard_arrow_down</i>
             </button>
         </div>
-
 
 
         <div class="card-text">
@@ -145,7 +247,7 @@
 
     </div>
     <div class="card-footer">Importat stuff</div>
-</div>
+
 
 
 <script>
