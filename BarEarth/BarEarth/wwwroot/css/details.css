@@ -7,14 +7,14 @@
 }
 
 .starFadeN {
-    background-image: url('/images/StarFade.gif');
+    /*background-image: url('/images/baseline-star_border-24px.svg');*/
     min-width: 30px;
     min-height: 30px;
     display: inline-block;
 }
 
 .starGlow {
-    background-image: url('/images/StarGlow.gif');
+    /*background-image: url('/images/baseline-star-24px.svg');*/
     min-width: 30px;
     min-height: 30px;
     display: inline-block;
@@ -22,7 +22,7 @@
 }
 
 .starGlowN {
-    background-image: url('/images/StarGlow.gif');
+    /*background-image: url('/images/baseline-star-24px.svg');*/
     min-width: 30px;
     min-height: 30px;
     display: inline-block;
