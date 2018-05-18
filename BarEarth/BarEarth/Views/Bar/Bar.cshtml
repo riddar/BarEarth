@@ -7,6 +7,13 @@
     var comments = (IEnumerable<BarEarth.Models.Rating>)ViewBag.Comments;
     var ratingSum = ViewBag.RatingSum;
     var ratingCount = ViewBag.RatingCount;
+    var str = Model.Type;
+    var str2 = Model.OpeningHours;
+
+    var types = str.Split(",");
+    var openingHours = str2.Split(",");
+
+    var resultTypes = types[0] + ", " + types[1] + ", " + types[2];
 
     decimal rating = 0;
     if (ratingCount > 0)
@@ -36,7 +43,7 @@
             <i class="material-icons">star_border</i>
             • @comments.Count() Reviews
         </h6>
-        <h6 class="card-subtitle">Sport-bar</h6>
+        <h6 class="card-subtitle">@resultTypes</h6>
     </div>
     <div class="card-body">
         <!--Put map in here-->
@@ -49,21 +56,30 @@
                     <tbody>
                         <tr id="BarAddress">
                             <th scope="row"><i class="material-icons">place</i></th>
-                            <td>Insert Address here</td>
+                            <td>@Model.Address</td>
                         </tr>
                         <tr id="BarOpenTimes">
                             <th scope="row"><i class="material-icons">schedule</i></th>
                             <td>
-                                Öppet nu: 11-00
+                                <select>
+                                    <option value="monday">@openingHours[0]</option>
+                                    <option value="tuesday">@openingHours[1]</option>
+                                    <option value="wednesday">@openingHours[2]</option>
+                                    <option value="thursday">@openingHours[3]</option>
+                                    <option value="friday">@openingHours[4]</option>
+                                    <option value="saturday">@openingHours[5]</option>
+                                    <option value="sunday">@openingHours[6]</option>
+                                </select>
+                               
                             </td>
                         </tr>
                         <tr id="BarWebsite">
                             <th scope="row"><i class="material-icons">public</i></th>
-                            <td>Insert website here</td>
+                            <td>@Model.Website</td>
                         </tr>
                         <tr id="BarPhone">
                             <th scope="row"><i class="material-icons">local_phone</i></th>
-                            <td>Insert phone here</td>
+                            <td>@Model.PhoneNumber</td>
                         </tr>
                     </tbody>
                 </table>
