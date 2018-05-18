@@ -22,6 +22,9 @@ namespace BarEarth.Models
         public string PlaceId { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
+        public string Address { get; set; }
+        public string OpeningHours { get; set; }
+        public string PhoneNumber { get; set; }
 
         public virtual IList<Rating> Ratings { get; set; }
         public virtual IList<Product> Products { get; set; }

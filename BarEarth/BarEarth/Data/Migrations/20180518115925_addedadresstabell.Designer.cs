@@ -11,9 +11,10 @@ using System;
 namespace BarEarth.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180518115925_addedadresstabell")]
+    partial class addedadresstabell
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,10 +94,6 @@ namespace BarEarth.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
-
-                    b.Property<string>("OpeningHours");
-
-                    b.Property<string>("PhoneNumber");
 
                     b.Property<string>("PlaceId");
 
