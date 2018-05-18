@@ -21,6 +21,7 @@
         rating = (ratingSum / ratingCount);
     }
     var totalRating = decimal.Parse(rating.ToString());
+   
 }
 
 
@@ -36,11 +37,20 @@
         <h2 class="card-title">@Model.Name</h2>
         <h6>
 
-            <i class="material-icons">star</i>
-            <i class="material-icons">star</i>
-            <i class="material-icons">star</i>
-            <i class="material-icons">star_half</i>
-            <i class="material-icons">star_border</i>
+           
+
+                @for (var i = 1; i <= rating; i++)
+                {
+                    <i class="material-icons">
+                        star
+                    </i>
+                }
+            @for (var i = (rating + 1); i <= 5; i++)
+            {
+                <i class="material-icons">
+                    star_border
+                </i>
+            }
             • @comments.Count() Reviews
         </h6>
         <h6 class="card-subtitle">@resultTypes</h6>
