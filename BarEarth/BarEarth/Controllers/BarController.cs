@@ -123,25 +123,33 @@ namespace BarEarth.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(IFormCollection form)
+        public ActionResult Add(IFormCollection form, string comment)
         {
             var review = form["Comment"].ToString();
             var barId = int.Parse(form["BarId"]);
             var rating = int.Parse(form["Rating"]);
 
-            Rating barComment = new Rating()
+            Rating barComment = new Rating
             {
-               BarId = barId,
-                Review = review,
+                BarId = barId,
                 Rate = rating,
-                DateTime = DateTime.Now,
-                UserName = userManager.GetUserName(HttpContext.User)
-        };
+                DateTime = DateTime.Now
+            };
+
+            try
+            {
+                barComment.UserName = userManager.GetUserName(HttpContext.User);
+                barComment.Review = review;
+            }
+            catch (Exception)
+            {
+                barComment.UserName = "anonymous";
+                barComment.Review = null;
+            }
 
             context.Ratings.Add(barComment);
             context.SaveChanges();
-
-            return RedirectToAction("Bar", new { id = barId });
+            return RedirectToAction("Bar", "Bar", new { id = barId });
         }
     }
 }
