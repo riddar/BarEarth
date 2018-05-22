@@ -34,7 +34,7 @@ function initMap() {
 
     map = new google.maps.Map(myMap, {
         center: currentPosition,
-        zoom: 15
+        zoom: 20
     });
     SearchBox();
 
