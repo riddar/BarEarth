@@ -1,7 +1,7 @@
 ﻿// Write your JavaScript code.
 let map = null;
-let latitude = 57.7089;
-let longitude = 11.9746;
+//let latitude = 57.7089;
+//let longitude = 11.9746;
 let currentPosition;
 let key = 'AIzaSyD4nV1sw-I7t74JHMhwkprurMSzM_WB_V8';
 let markers = [];
@@ -27,7 +27,7 @@ function initMap() {
         lat: latitude,
         lng: longitude
     };
-    let myMap = document.getElementById('map');
+    let myMap = document.getElementById('barViewMap');
     if (!myMap) return;
 
     map = new google.maps.Map(myMap, {
@@ -151,8 +151,8 @@ function getPlaceInfo(Places) {
         let type;
         let email;
         let photoreference = "";
-        let latitude;
         let longitude;
+        let latitude;
 
         let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
         console.log('Hämtar data från: ' + finalUrl);
@@ -171,18 +171,18 @@ function getPlaceInfo(Places) {
                 phoneNumber = `${obj.result.international_phone_number}`;
                 website = `${obj.result.website}`;
                 type = `${obj.result.types}`;
-                latitude = `${obj.result.geometry.location.lat}`;
-                longitude = `${obj.result.geometry.location.lng}`;
+              
+
 
                 for (let j = 0; j < 5; j++) {
 
                     photoreference += `${obj.result.photos[j].photo_reference},`;
                 }
 
-                console.log(obj.result.geometry.location.lng);
+                console.log(photoreference);
                 //console.log(openingHours);
 
-                SendData(barName, barId,barAdress,openingHours,phoneNumber,type,website, photoreference,latitude,longitude);
+                SendData(barName, barId,barAdress,openingHours,phoneNumber,type,website, photoreference);
             })
             .catch(message => {
                 console.log('Något gick fel: ' + message);
@@ -266,7 +266,7 @@ function SearchBox() {
     });
 }
 //JSON data
-function SendData(barname,barId,barAddress,openingHours,phoneNumber,type,website, photoReference,latitude,longitude) {
+function SendData(barname,barId,barAddress,openingHours,phoneNumber,type,website, photoReference) {
 
     let dataType = 'application/json; charset=utf-8';
     let data = {
@@ -277,9 +277,7 @@ function SendData(barname,barId,barAddress,openingHours,phoneNumber,type,website
         PhoneNumber: phoneNumber,
         Type: type,
         Website: website,
-        PhotoReference: photoReference,
-        Longitude: longitude,
-        Latitude: latitude
+        PhotoReference: photoReference
     }
 
     console.log('Submitting form...');

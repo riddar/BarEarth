@@ -41,6 +41,8 @@ namespace BarEarth.Controllers
                 Bar2.Type = bar.Type;
                 Bar2.PhoneNumber = bar.PhoneNumber;
                 Bar2.PhotoReference = bar.PhotoReference;
+                Bar2.Longitude = bar.Longitude;
+                Bar2.Latitude = bar.Latitude;
                 _context.Bars.Add(Bar2);
                 _context.SaveChanges();
 
