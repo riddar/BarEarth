@@ -35,8 +35,14 @@ namespace BarEarth.Controllers
             {
                 Bar2.Name = bar.Name;
                 Bar2.PlaceId = bar.PlaceId;
+                Bar2.Address = bar.Address;
+                Bar2.OpeningHours = bar.OpeningHours;
+                Bar2.Website = bar.Website;
+                Bar2.Type = bar.Type;
+                Bar2.PhoneNumber = bar.PhoneNumber;
                 _context.Bars.Add(Bar2);
                 _context.SaveChanges();
+
             }
             return Json(bar);
         }

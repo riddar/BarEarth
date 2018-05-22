@@ -142,6 +142,12 @@ function getPlaceInfo(Places) {
         let placeId = places[i].place_id;
         let barName;
         let barId;
+        let barAdress;
+        let openingHours;
+        let website;
+        let phoneNumber;
+        let type;
+        let email;
 
         let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
         console.log('Hämtar data från: ' + finalUrl);
@@ -155,8 +161,18 @@ function getPlaceInfo(Places) {
                 console.log('Lyckades hämta data');
                 barName = `${obj.result.name}`;
                 barId = `${obj.result.place_id}`;
-                console.log(barName)
-                SendData(barName, barId);
+                barAdress = `${obj.result.formatted_address}`;
+                openingHours = `${obj.result.opening_hours.weekday_text}`;
+                phoneNumber = `${obj.result.international_phone_number}`;
+                website = `${obj.result.website}`;
+                type = `${obj.result.types}`;
+                
+
+                
+
+                console.log(openingHours);
+
+                SendData(barName, barId,barAdress,openingHours,phoneNumber,type,website);
             })
             .catch(message => {
                 console.log('Något gick fel: ' + message);
@@ -240,12 +256,17 @@ function SearchBox() {
     });
 }
 //JSON data
-function SendData(barname,barId) {
+function SendData(barname,barId,barAddress,openingHours,phoneNumber,type,website) {
 
     let dataType = 'application/json; charset=utf-8';
     let data = {
         Name: barname,
-        PlaceId: barId
+        PlaceId: barId,
+        Address: barAddress,
+        OpeningHours: openingHours,
+        PhoneNumber: phoneNumber,
+        Type: type,
+        Website: website   
     }
 
     console.log('Submitting form...');
@@ -256,8 +277,8 @@ function SendData(barname,barId) {
         contentType: dataType,
         data: data,
         success: function (result) {
-            console.log('Data received: ');
-            console.log(result);
+            //console.log('Data received: ');
+            //console.log(result);
         }
     });
 }
