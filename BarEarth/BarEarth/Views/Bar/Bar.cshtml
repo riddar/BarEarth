@@ -1,15 +1,17 @@
 ﻿@model BarEarth.Models.Bar
 @{ViewData["Title"] = "Address";}
 
-<link rel="stylesheet" href="~/css/map.css" />
-
 @section scripts {
-    <script src="~/js/site.js"></script>
+    <script src="~/js/barInfoMap.js"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXqGMybRiPHnWLdwBQ7ubymS7lQg8dIj0&libraries=places&callback=initMap"
             async defer></script>
 
 }
+@{
+
+}
+<link rel="stylesheet" href="~/css/barViewMap.css" />
 
 @{
     ViewBag.Title = Model.Name;
@@ -113,7 +115,7 @@
                 </table>
             </div>
             <div class="col-8">
-                <div id="map"></div>
+                <div id="barViewMap"></div>
                 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
             </div>
 
