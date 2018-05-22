@@ -1,6 +1,15 @@
 ﻿@model BarEarth.Models.Bar
 @{ViewData["Title"] = "Address";}
 
+<link rel="stylesheet" href="~/css/map.css" />
+
+@section scripts {
+    <script src="~/js/site.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXqGMybRiPHnWLdwBQ7ubymS7lQg8dIj0&libraries=places&callback=initMap"
+            async defer></script>
+
+}
 
 @{
     ViewBag.Title = Model.Name;
@@ -10,7 +19,7 @@
     var str = Model.Type;
     var str2 = Model.OpeningHours;
     var barPhotos = Model.PhotoReference;
-    var key ="AIzaSyD4nV1sw-I7t74JHMhwkprurMSzM_WB_V8";
+    var key = "AIzaSyD4nV1sw-I7t74JHMhwkprurMSzM_WB_V8";
 
     var types = str.Split(",");
     var openingHours = str2.Split(",");
@@ -33,6 +42,7 @@
 
 
 
+
 <div class="card mb-3" style="width: 70rem;  background-color: #fff; margin:auto; margin-top: 10vh;">
     <div class="card-img-top" style="background-image: url(@photoString); height: 250px; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative;">
         <div class="card-img-overlay d-flex flex-row-reverse ">
@@ -45,14 +55,14 @@
         <h2 class="card-title">@Model.Name</h2>
         <h6>
 
-           
 
-                @for (var i = 1; i <= rating; i++)
-                {
-                    <i class="material-icons">
-                        star
-                    </i>
-                }
+
+            @for (var i = 1; i <= rating; i++)
+            {
+                <i class="material-icons">
+                    star
+                </i>
+            }
             @for (var i = (rating + 1); i <= 5; i++)
             {
                 <i class="material-icons">
@@ -88,7 +98,7 @@
                                     <option value="saturday">@openingHours[5]</option>
                                     <option value="sunday">@openingHours[6]</option>
                                 </select>
-                               
+
                             </td>
                         </tr>
                         <tr id="BarWebsite">
@@ -103,7 +113,8 @@
                 </table>
             </div>
             <div class="col-8">
-                <img class="w-100" src="http://images.indianexpress.com/2017/05/google-maps-759.jpg" />
+                <div id="map"></div>
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
             </div>
 
         </div>
@@ -158,58 +169,25 @@
 
         <!--Here's the last 3 comments-->
         @{
-        var lastThreeComments = comments.TakeLast(3).Reverse();
+            var lastThreeComments = comments.TakeLast(3).Reverse();
         }
 
 
         <div class="card-deck">
             @foreach (var c in lastThreeComments)
-        {
-            <div class="card w-50">
-                <div class="card-body">
-                    <h5 class="card-title">@c.UserName</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">
-                        @for (var i = 1; i <= c.Rate; i++)
-                    {
-                        <i class="material-icons">star</i>
-                }
-                        @for (var i = (c.Rate + 1); i <= 5; i++)
-                    {
-                        <i class="material-icons">star_border</i>
-                }
-                    </h6>
-                    <p class="card-text">@c.Review</p>
-                    <div class="card-footer">
-                        <p class="card-text"><small class="text-muted">@c.DateTime</small></p>
-                    </div>
-                </div>
-            </div>
-    }
-        </div>
-
-        <!--Here's the rest with a dropdown function-->
-
-        @{
-            var amountOfComments = comments.Count();
-            var restOfComments = comments.Take(amountOfComments-3).Reverse();
-        }
-
-        <div id="collapseComments" class="collapse " aria-labelledby="headingOne" data-parent="#accordion" style="margin-top:10px;">
-            <div class="card-columns">
-                @foreach (var c in restOfComments)
             {
-                <div class="card">
+                <div class="card w-50">
                     <div class="card-body">
                         <h5 class="card-title">@c.UserName</h5>
                         <h6 class="card-subtitle mb-2 text-muted">
                             @for (var i = 1; i <= c.Rate; i++)
-                        {
-                            <i class="material-icons">star</i>
-                    }
+                            {
+                                <i class="material-icons">star</i>
+                            }
                             @for (var i = (c.Rate + 1); i <= 5; i++)
-                        {
-                            <i class="material-icons">star_border</i>
-                    }
+                            {
+                                <i class="material-icons">star_border</i>
+                            }
                         </h6>
                         <p class="card-text">@c.Review</p>
                         <div class="card-footer">
@@ -217,7 +195,40 @@
                         </div>
                     </div>
                 </div>
+            }
+        </div>
+
+        <!--Here's the rest with a dropdown function-->
+
+        @{
+            var amountOfComments = comments.Count();
+            var restOfComments = comments.Take(amountOfComments - 3).Reverse();
         }
+
+        <div id="collapseComments" class="collapse " aria-labelledby="headingOne" data-parent="#accordion" style="margin-top:10px;">
+            <div class="card-columns">
+                @foreach (var c in restOfComments)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@c.UserName</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                @for (var i = 1; i <= c.Rate; i++)
+                                {
+                                    <i class="material-icons">star</i>
+                                }
+                                @for (var i = (c.Rate + 1); i <= 5; i++)
+                                {
+                                    <i class="material-icons">star_border</i>
+                                }
+                            </h6>
+                            <p class="card-text">@c.Review</p>
+                            <div class="card-footer">
+                                <p class="card-text"><small class="text-muted">@c.DateTime</small></p>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
 
         </div>
@@ -240,7 +251,7 @@
 
 
 
-                <script>
+<script>
         function SCRate() {
             for (var i = 1; i <= @totalRating; i++) {
                 $("#sRate" + i).attr('class', 'starGlowN');
@@ -251,4 +262,4 @@
         $(function(){
             SCRate();
         });
-                </script>
+</script>
