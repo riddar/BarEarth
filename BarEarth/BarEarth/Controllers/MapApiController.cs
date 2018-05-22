@@ -40,6 +40,7 @@ namespace BarEarth.Controllers
                 Bar2.Website = bar.Website;
                 Bar2.Type = bar.Type;
                 Bar2.PhoneNumber = bar.PhoneNumber;
+                Bar2.PhotoReference = bar.PhotoReference;
                 _context.Bars.Add(Bar2);
                 _context.SaveChanges();
 

@@ -148,6 +148,7 @@ function getPlaceInfo(Places) {
         let phoneNumber;
         let type;
         let email;
+        let photoreference = "";
 
         let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
         console.log('Hämtar data från: ' + finalUrl);
@@ -166,13 +167,16 @@ function getPlaceInfo(Places) {
                 phoneNumber = `${obj.result.international_phone_number}`;
                 website = `${obj.result.website}`;
                 type = `${obj.result.types}`;
-                
 
-                
+                for (let j = 0; j < 5; j++) {
 
-                console.log(openingHours);
+                    photoreference += `${obj.result.photos[j].photo_reference},`;
+                }
 
-                SendData(barName, barId,barAdress,openingHours,phoneNumber,type,website);
+                console.log(photoreference);
+                //console.log(openingHours);
+
+                SendData(barName, barId,barAdress,openingHours,phoneNumber,type,website, photoreference);
             })
             .catch(message => {
                 console.log('Något gick fel: ' + message);
@@ -256,7 +260,7 @@ function SearchBox() {
     });
 }
 //JSON data
-function SendData(barname,barId,barAddress,openingHours,phoneNumber,type,website) {
+function SendData(barname,barId,barAddress,openingHours,phoneNumber,type,website, photoReference) {
 
     let dataType = 'application/json; charset=utf-8';
     let data = {
@@ -266,7 +270,8 @@ function SendData(barname,barId,barAddress,openingHours,phoneNumber,type,website
         OpeningHours: openingHours,
         PhoneNumber: phoneNumber,
         Type: type,
-        Website: website   
+        Website: website,
+        PhotoReference: photoReference
     }
 
     console.log('Submitting form...');

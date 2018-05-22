@@ -25,6 +25,7 @@ namespace BarEarth.Models
         public string Address { get; set; }
         public string OpeningHours { get; set; }
         public string PhoneNumber { get; set; }
+        public string PhotoReference { get; set; }
 
         public virtual IList<Rating> Ratings { get; set; }
         public virtual IList<Product> Products { get; set; }
