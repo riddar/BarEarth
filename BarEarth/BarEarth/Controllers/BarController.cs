@@ -129,19 +129,26 @@ namespace BarEarth.Controllers
             var barId = int.Parse(form["BarId"]);
             var rating = int.Parse(form["Rating"]);
 
-            Rating barComment = new Rating()
+            Rating barComment = new Rating();
+            barComment.BarId = barId;
+            barComment.Rate = rating;
+            barComment.DateTime = DateTime.Now;
+            try
             {
-               BarId = barId,
-                Review = review,
-                Rate = rating,
-                DateTime = DateTime.Now,
-                UserName = userManager.GetUserName(HttpContext.User)
-        };
-
-            context.Ratings.Add(barComment);
-            context.SaveChanges();
-
-            return RedirectToAction("Bar", new { id = barId });
+                barComment.UserName = userManager.GetUserName(HttpContext.User);
+                barComment.Review = review;
+                context.Ratings.Add(barComment);
+                context.SaveChanges();
+                return RedirectToAction("Bar", "Bar", new { id = barId });
+            }
+            catch (Exception)
+            {
+                barComment.UserName = "anonymous";
+                barComment.Review = null;
+                context.Ratings.Add(barComment);
+                context.SaveChanges();
+                return RedirectToAction("Bar", "Bar", new { id = barId });
+            }
         }
     }
 }
