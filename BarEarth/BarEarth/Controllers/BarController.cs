@@ -3,6 +3,7 @@ using BarEarth.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,16 +27,13 @@ namespace BarEarth.Controllers
         public ActionResult Bar(int? id)
         {
             if (id == null)
-            {
                 return View();
-            }
+
             Bar Bar = context.Bars.FirstOrDefault(b => b.Id == id);
 
-
             if (Bar == null)
-            {
                 return View();
-            }
+
             ViewBag.BarId = id.Value;
 
             var comments = context.Ratings.Where(d => d.Bar.Id == id).ToList();
@@ -58,7 +56,37 @@ namespace BarEarth.Controllers
             return View(Bar);
         }
 
-       [Route("Bar/details")]
+        [Route("Bar/barName")]
+        public async Task<ActionResult> BarName(string name)
+        {
+            if (name == null)
+                return View();
+
+            Bar bar = await context.Bars.Where(b => b.Name == name).Include(b => b.Ratings).FirstOrDefaultAsync();
+
+            ViewBag.BarId = bar.Id;
+
+            var comments = context.Ratings.Where(d => d.Bar.Id == bar.Id).ToList();
+            ViewBag.Comments = comments;
+
+            var ratings = context.Ratings.Where(d => d.Bar.Id == bar.Id).ToList();
+            if (ratings.Count() > 0)
+            {
+                var ratingSum = ratings.Select(d => d.Rate).Sum();
+                ViewBag.RatingSum = ratingSum;
+                var ratingCount = ratings.Count();
+                ViewBag.RatingCount = ratingCount;
+            }
+            else
+            {
+                ViewBag.RatingSum = 0;
+                ViewBag.RatingCount = 0;
+            }
+
+            return View("Bar", bar);
+        }
+
+        [Route("Bar/details")]
         public ActionResult Details(int? id)
         {
             if (id == null)

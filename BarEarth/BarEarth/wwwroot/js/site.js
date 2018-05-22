@@ -75,10 +75,12 @@ function createMarkers(places) {
             position: place.geometry.location,
         });
 
+        console.log('placetest: ', place);
         marker.addListener('click', function () {
             let latitude = this.position.lat();
             let longitude = this.position.lng();
-            infowindow.setContent(place.name +
+
+            infowindow.setContent('<form method="post" action="/Bar/barName?name=' + place.name + '"><button type=submit>' + place.name + '</button></form>' +
                 '<br />' +
                 '<div><button type="button" class="btn btn-success" id="btnDirection">Direction</button> </div>');
             infowindow.open(map, marker);
