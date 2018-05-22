@@ -151,6 +151,8 @@ function getPlaceInfo(Places) {
         let type;
         let email;
         let photoreference = "";
+        let latitude;
+        let longitude;
 
         let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
         console.log('Hämtar data från: ' + finalUrl);
@@ -169,16 +171,18 @@ function getPlaceInfo(Places) {
                 phoneNumber = `${obj.result.international_phone_number}`;
                 website = `${obj.result.website}`;
                 type = `${obj.result.types}`;
+                latitude = `${obj.result.geometry.location.lat}`;
+                longitude = `${obj.result.geometry.location.lng}`;
 
                 for (let j = 0; j < 5; j++) {
 
                     photoreference += `${obj.result.photos[j].photo_reference},`;
                 }
 
-                console.log(photoreference);
+                console.log(obj.result.geometry.location.lng);
                 //console.log(openingHours);
 
-                SendData(barName, barId,barAdress,openingHours,phoneNumber,type,website, photoreference);
+                SendData(barName, barId,barAdress,openingHours,phoneNumber,type,website, photoreference,latitude,longitude);
             })
             .catch(message => {
                 console.log('Något gick fel: ' + message);
@@ -262,7 +266,7 @@ function SearchBox() {
     });
 }
 //JSON data
-function SendData(barname,barId,barAddress,openingHours,phoneNumber,type,website, photoReference) {
+function SendData(barname,barId,barAddress,openingHours,phoneNumber,type,website, photoReference,latitude,longitude) {
 
     let dataType = 'application/json; charset=utf-8';
     let data = {
@@ -273,7 +277,9 @@ function SendData(barname,barId,barAddress,openingHours,phoneNumber,type,website
         PhoneNumber: phoneNumber,
         Type: type,
         Website: website,
-        PhotoReference: photoReference
+        PhotoReference: photoReference,
+        Longitude: longitude,
+        Latitude: latitude
     }
 
     console.log('Submitting form...');

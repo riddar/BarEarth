@@ -1,7 +1,7 @@
 ﻿// Write your JavaScript code.
 let map = null;
-let latitude = 57.7089;
-let longitude = 11.9746;
+//let latitude = 57.7089;
+//let longitude = 11.9746;
 let currentPosition;
 let key = 'AIzaSyD4nV1sw-I7t74JHMhwkprurMSzM_WB_V8';
 let markers = [];
@@ -151,6 +151,8 @@ function getPlaceInfo(Places) {
         let type;
         let email;
         let photoreference = "";
+        let longitude;
+        let latitude;
 
         let finalUrl = `${url}?placeid=${placeId}&key=${key}`;
         console.log('Hämtar data från: ' + finalUrl);
@@ -169,6 +171,8 @@ function getPlaceInfo(Places) {
                 phoneNumber = `${obj.result.international_phone_number}`;
                 website = `${obj.result.website}`;
                 type = `${obj.result.types}`;
+              
+
 
                 for (let j = 0; j < 5; j++) {
 
