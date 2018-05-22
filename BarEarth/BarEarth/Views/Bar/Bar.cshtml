@@ -19,11 +19,12 @@
 
 
 <div class="card mb-3" style="width: 70rem;  background-color: #fff; margin:auto; margin-top: 10vh;">
-    <img class="card-img-top" src="https://www.scandichotels.se/imageVault/publishedmedia/suw58cmdyrxfvvjep2a5/Scandic-Malmen-Interior-bar-Lilla-hotellbaren-over.jpg" style="height:200px;" />
-    <div class="card-img-overlay d-flex flex-row-reverse ">
-        <button type="button" class="btn btn-primary bmd-btn-fab" style="margin-top: 150px;">
-            <i class="material-icons">directions</i>
-        </button>
+    <div class="card-img-top" style="background-image: url(https://www.scandichotels.se/imageVault/publishedmedia/suw58cmdyrxfvvjep2a5/Scandic-Malmen-Interior-bar-Lilla-hotellbaren-over.jpg); height: 250px; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative;">
+        <div class="card-img-overlay d-flex flex-row-reverse ">
+            <button type="button" class="btn btn-primary bmd-btn-fab" style="margin-top: 200px;">
+                <i class="material-icons">directions</i>
+            </button>
+        </div>
     </div>
     <div class="card-header text-white" style="background-color:#2195F2">
         <h2 class="card-title">@Model.Name</h2>
@@ -71,7 +72,7 @@
             <div class="col-8">
                 <img class="w-100" src="http://images.indianexpress.com/2017/05/google-maps-759.jpg" />
             </div>
-            
+
         </div>
 
         <hr />
@@ -103,54 +104,9 @@
         <!--Comment section-->
         <h4 class="card-header">Comments</h4>
         <!--Here does the users comment and score sit-->
-        @*<form>*@
-        @*<div class="form-group">
-                <label for="exampleTextarea" class="bmd-label-floating">Enter your comment here!</label>
-                <textarea class="form-control" id="exampleTextarea" rows="4"></textarea>
-                <span class="bmd-help">Will we put text here?</span>
-            </div>
-            <button class="btn btn-default">Cancel</button>
 
-            <button type="submit" class="btn btn-primary btn-raised">Submit</button>*@
 
         @Html.Partial("_CommentBox")
-        @*</form>*@
-
-        @{
-            var lastThreeComments = comments.TakeLast(3).Reverse();
-        }
-
-        @foreach (var c in lastThreeComments)
-        {
-            <form>
-            <div class="card-columns card-group">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">@c.UserName</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-
-
-                            @for (var i = 1; i <= c.Rate; i++)
-                            {
-                            <i class="material-icons">
-                                star
-                            </i>
-                            }
-                            @for (var i = (c.Rate + 1); i <= 5; i++)
-                            {
-                                <i class="material-icons">
-                                    star_border
-                                </i>
-                            }
-
-                        </h6>
-                        <p class="card-text">@c.Review</p>
-                        <div class="card-footer">
-                            <p class="card-text"><small class="text-muted">@c.DateTime</small></p>
-                        </div>
-
-            <button type="submit" class="btn btn-primary btn-raised">Submit</button>
-        </form>
 
         <form>
             <label class="radio-inline">
@@ -167,71 +123,71 @@
             </label>
         </form>
 
-     
-
+        <!--Here's the last 3 comments-->
+        @{
+        var lastThreeComments = comments.TakeLast(3).Reverse();
         }
-        <!--Here is all comments and reviews-->
 
 
-            <div id="collapseComments" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
-
-                <div class="card-deck">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Sven Svensson</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                4,3 •
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star_half</i>
-                                <i class="material-icons">star_border</i>
-                            </h6>
-                            <p class="card-text">Lorem ipsum dolor sit amet, ei vix putent labores adipiscing. Cu cum partem reprimique. Solum consul delenit ex nam, harum solet an eos, harum assentior adipiscing vis ne. Cu eirmod repudiandae his, ad nec eripuit nusquam cotidieque, nam ei vide soluta expetendis.</p>
-                            <div class="card-footer">
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
+        <div class="card-deck">
+            @foreach (var c in lastThreeComments)
+        {
+            <div class="card w-50">
+                <div class="card-body">
+                    <h5 class="card-title">@c.UserName</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        @for (var i = 1; i <= c.Rate; i++)
+                    {
+                        <i class="material-icons">star</i>
+                }
+                        @for (var i = (c.Rate + 1); i <= 5; i++)
+                    {
+                        <i class="material-icons">star_border</i>
+                }
+                    </h6>
+                    <p class="card-text">@c.Review</p>
+                    <div class="card-footer">
+                        <p class="card-text"><small class="text-muted">@c.DateTime</small></p>
                     </div>
+                </div>
+            </div>
+    }
+        </div>
 
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Sven Svensson</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                4,3 •
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star_half</i>
-                                <i class="material-icons">star_border</i>
-                            </h6>
-                            <p class="card-text">Ex vix viris reprimique, no eum delectus assueverit. Nemore perfecto id vim, zril suscipiantur vix ex. Eu vitae persius elaboraret usu, per mucius invidunt et. Nam an ludus posidonium delicatissimi, mea sint suscipiantur ad, at tollit omnesque postulant sed. In has nullam possim doctus, oportere volutpat democritum duo ei, mea quis euismod salutandi no.</p>
-                            <div class="card-footer">
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
+        <!--Here's the rest with a dropdown function-->
 
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Sven Svensson</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                4,3 •
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star_half</i>
-                                <i class="material-icons">star_border</i>
-                            </h6>
-                            <p class="card-text">Oporteat euripidis vituperatoribus ex eos. In vis velit euismod tibique. Ne per graeci facilisi mnesarchum. An dolore alienum quaestio vim.</p>
-                            <div class="card-footer">
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
+        @{
+            var amountOfComments = comments.Count();
+            var restOfComments = comments.Take(amountOfComments-3).Reverse();
+        }
+
+        <div id="collapseComments" class="collapse " aria-labelledby="headingOne" data-parent="#accordion" style="margin-top:10px;">
+            <div class="card-columns">
+                @foreach (var c in restOfComments)
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@c.UserName</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            @for (var i = 1; i <= c.Rate; i++)
+                        {
+                            <i class="material-icons">star</i>
+                    }
+                            @for (var i = (c.Rate + 1); i <= 5; i++)
+                        {
+                            <i class="material-icons">star_border</i>
+                    }
+                        </h6>
+                        <p class="card-text">@c.Review</p>
+                        <div class="card-footer">
+                            <p class="card-text"><small class="text-muted">@c.DateTime</small></p>
                         </div>
                     </div>
                 </div>
-               
+        }
             </div>
+
+        </div>
 
         <div class="card-header nav justify-content-center" id="CommentSection">
 
@@ -247,10 +203,11 @@
 
     </div>
     <div class="card-footer">Importat stuff</div>
+</div>
 
 
 
-<script>
+                <script>
         function SCRate() {
             for (var i = 1; i <= @totalRating; i++) {
                 $("#sRate" + i).attr('class', 'starGlowN');
@@ -261,4 +218,4 @@
         $(function(){
             SCRate();
         });
-</script>
+                </script>
