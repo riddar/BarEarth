@@ -70,6 +70,9 @@ namespace BarEarth.Controllers
         [HttpPost, ActionName("Table")]
         public IActionResult TablePost(Bar bar)
         {
+            if (bar == null)
+                return NotFound();
+
             return RedirectToAction("Bar", "Bar", bar);
         }
     }
