@@ -73,10 +73,10 @@
                 <span asp-validation-for="PhotoReference" class="text-danger"></span>
             </div>
             <div>
-                    <a asp-controller="Admin" asp-action="ProductsEdit" asp-route-id="@Model.Id">Edit Products</a>
+                <a asp-controller="Admin" asp-action="ProductsEdit" asp-route-id="@Model.Id" class="btn btn-raised btn-dark">Edit products</a>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-raised btn-dark" />
             </div>
         </form>
     </div>

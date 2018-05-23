@@ -60,7 +60,13 @@ namespace BarEarth.Controllers
             context.Update(bar);
             await context.SaveChangesAsync();
 
-            return RedirectToAction("BarEdit", "Admin", bar.Id);
+            bar = await context.Bars
+                .Where(b => b.Id == bar.Id)
+                .Include(b => b.Ratings)
+                .Include(b => b.Products)
+                .FirstOrDefaultAsync();
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet, Route("Admin/ProductsEdit")]
@@ -76,6 +82,28 @@ namespace BarEarth.Controllers
                 .FirstOrDefaultAsync();
 
             return View(bar);
+        }
+
+        [HttpPost, Route("Admin/ProductsEdit")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ProductEditPost(Bar bar)
+        {
+            if (bar == null)
+                return View();
+
+            foreach(var product in bar.Products)
+            {
+                context.Update(product);
+                await context.SaveChangesAsync();
+            }
+
+            bar = await context.Bars
+                .Where(b => b.Id == bar.Id)
+                .Include(b => b.Ratings)
+                .Include(b => b.Products)
+                .FirstOrDefaultAsync();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
