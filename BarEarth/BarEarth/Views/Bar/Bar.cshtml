@@ -59,27 +59,31 @@
             </button>
         </div>
     </div>
-    <div class="card-header text-white SecondaryColor">
-        <h2 class="card-title">@Model.Name</h2>
-        <h6>
+
+    <!--Here is the banner at top is stored-->
+    <div class="SecondaryColor">
+        <div class="card-header  ">
+            <h2 class="card-title">@Model.Name</h2>
+            <h6>
 
 
 
-            @for (var i = 1; i <= rating; i++)
-            {
-                <i class="material-icons">
-                    star
-                </i>
-            }
-            @for (var i = (rating + 1); i <= 5; i++)
-            {
-                <i class="material-icons">
-                    star_border
-                </i>
-            }
-            • @comments.Count() Reviews
-        </h6>
-        <h6 class="card-subtitle">@resultTypes</h6>
+                @for (var i = 1; i <= rating; i++)
+                {
+                    <i class="material-icons">
+                        star
+                    </i>
+                }
+                @for (var i = (rating + 1); i <= 5; i++)
+                {
+                    <i class="material-icons">
+                        star_border
+                    </i>
+                }
+                • @comments.Count() Reviews
+            </h6>
+            <h6 class="card-subtitle">@resultTypes</h6>
+        </div>
     </div>
     <div class="card-body">
         
