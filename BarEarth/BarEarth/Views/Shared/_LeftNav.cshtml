@@ -12,8 +12,8 @@
 <header class="SecondaryColor">
     @await Html.PartialAsync("_LoginPartial")
 </header>
-<a asp-area="" asp-controller="Home" asp-action="Map" class="dropdown-item"><i class="material-icons">map</i>Kartan</a>
-<a asp-area="" asp-controller="Home" asp-action="Table" class="dropdown-item"><i class="material-icons">list</i>Listan</a>
+<a asp-area="" asp-controller="Map" asp-action="Map" class="dropdown-item"><i class="material-icons">map</i>Kartan</a>
+<a asp-area="" asp-controller="Table" asp-action="Table" class="dropdown-item"><i class="material-icons">list</i>Listan</a>
 @if (SignInManager.IsSignedIn(User))
 {
     <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">crop_square</i>Sparade barer</a>
