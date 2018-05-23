@@ -31,8 +31,10 @@
 }
 
 
-
+<!--This is the card that houses our bar-->
 <div class="card mb-3" style="width: 70rem;  background-color: #fff; margin:auto; margin-top: 10vh;">
+
+    <!--this is where the banner picture is set-->
     <div class="card-img-top" style="background-image: url(https://www.scandichotels.se/imageVault/publishedmedia/suw58cmdyrxfvvjep2a5/Scandic-Malmen-Interior-bar-Lilla-hotellbaren-over.jpg); height: 250px; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative;">
         <div class="card-img-overlay d-flex flex-row-reverse ">
             <button type="button" class="btn btn-primary bmd-btn-fab" style="margin-top: 200px;">
@@ -40,11 +42,14 @@
             </button>
         </div>
     </div>
-    <div class="card-header text-white SecondaryColor">
-        <h2 class="card-title">@Model.Name</h2>
-        <h6>
 
-           
+    <!--Here is the banner at top is stored-->
+    <div class="SecondaryColor">
+        <div class="card-header  ">
+            <h2 class="card-title">@Model.Name</h2>
+            <h6>
+
+
 
                 @for (var i = 1; i <= rating; i++)
                 {
@@ -52,15 +57,16 @@
                         star
                     </i>
                 }
-            @for (var i = (rating + 1); i <= 5; i++)
-            {
-                <i class="material-icons">
-                    star_border
-                </i>
-            }
-            • @comments.Count() Reviews
-        </h6>
-        <h6 class="card-subtitle">@resultTypes</h6>
+                @for (var i = (rating + 1); i <= 5; i++)
+                {
+                    <i class="material-icons">
+                        star_border
+                    </i>
+                }
+                • @comments.Count() Reviews
+            </h6>
+            <h6 class="card-subtitle">@resultTypes</h6>
+        </div>
     </div>
     <div class="card-body">
         
