@@ -1,0 +1,24 @@
+﻿.PrimaryColor{
+    background-color: #78909c;
+    color: black;
+}
+.PrimaryColorLigth {
+    background-color: #a7c0cd;
+    color: black;
+}
+.PrimaryColorDark{
+    background-color: #4b636e;
+    color: white;
+}
+.SecondaryColor {
+    background-color: #ffe082;
+    color: black;
+}
+.SecondaryColorLigth {
+    background-color: #ffffb3;
+    color: black;
+}
+.SecondaryColorDark {
+    background-color: #caae53;
+    color: black;
+}
