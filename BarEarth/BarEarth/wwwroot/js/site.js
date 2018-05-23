@@ -80,9 +80,9 @@ function createMarkers(places) {
             let latitude = this.position.lat();
             let longitude = this.position.lng();
 
-            infowindow.setContent('<form method="post" action="/Bar/barName?name=' + place.name + '"><button type=submit>' + place.name + '</button></form>' +
+            infowindow.setContent('<form method="post" action="/Bar/barName?name=' + place.name + '"><button type=submit class="btn btn-primary">' + place.name + '</button></form>' +
                 '<br />' +
-                '<div><button type="button" class="btn btn-success" id="btnDirection">Direction</button> </div>');
+                '<div><button type="button" class="btn btn-info" id="btnDirection">Direction</button> </div>');
             infowindow.open(map, marker);
             $('#btnDirection').bind('click', function () {
                 calcRoute(currentPosition, latitude, longitude, directionsService, directionsDisplay);
