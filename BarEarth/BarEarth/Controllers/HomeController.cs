@@ -64,7 +64,6 @@ namespace BarEarth.Controllers
 
         public bool AddressExists(string address)
         {
-            //fix later
             return true;
         }
     }

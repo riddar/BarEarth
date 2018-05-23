@@ -9,5 +9,6 @@ namespace BarEarth.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        public virtual IList<Bar> Bars { get; set; }
     }
 }

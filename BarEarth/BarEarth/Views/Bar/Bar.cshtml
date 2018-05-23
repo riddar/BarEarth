@@ -12,9 +12,6 @@
             async defer></script>
 
 }
-@{
-
-}
 <link rel="stylesheet" href="~/css/barViewMap.css" />
 
 
@@ -83,10 +80,11 @@
     </div>
     <div class="card-body">
         <!--Put map in here-->
+ 
         <div class="row">
             <div class="col-4">
                 <p>
-                    Lorem ipsum dolor sit amet, ei vix putent labores adipiscing. Cu cum partem reprimique. Solum consul delenit ex nam, harum solet an eos, harum assentior adipiscing vis ne. Cu eirmod repudiandae his, ad nec eripuit nusquam cotidieque, nam ei vide soluta expetendis.
+                    @Model.Description
                 </p>
                 <table class="table">
                     <tbody>
@@ -116,6 +114,12 @@
                         <tr id="BarPhone">
                             <th scope="row"><i class="material-icons">local_phone</i></th>
                             <td>@Model.PhoneNumber</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><i class="material-icons">list</i></th>
+                            <td>
+                                <a asp-controller="Product" asp-action="Products" asp-route-id="@Model.Id">Meny</a><br />
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -176,25 +180,58 @@
 
         <!--Here's the last 3 comments-->
         @{
-            var lastThreeComments = comments.TakeLast(3).Reverse();
+        var lastThreeComments = comments.TakeLast(3).Reverse();
         }
 
 
         <div class="card-deck">
             @foreach (var c in lastThreeComments)
+        {
+            <div class="card w-50">
+                <div class="card-body">
+                    <h5 class="card-title">@c.UserName</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        @for (var i = 1; i <= c.Rate; i++)
+                    {
+                        <i class="material-icons">star</i>
+                }
+                        @for (var i = (c.Rate + 1); i <= 5; i++)
+                    {
+                        <i class="material-icons">star_border</i>
+                }
+                    </h6>
+                    <p class="card-text">@c.Review</p>
+                    <div class="card-footer">
+                        <p class="card-text"><small class="text-muted">@c.DateTime</small></p>
+                    </div>
+                </div>
+            </div>
+    }
+        </div>
+
+        <!--Here's the rest with a dropdown function-->
+
+        @{
+        var amountOfComments = comments.Count();
+        var restOfComments = comments.Take(amountOfComments - 3).Reverse();
+        }
+
+        <div id="collapseComments" class="collapse " aria-labelledby="headingOne" data-parent="#accordion" style="margin-top:10px;">
+            <div class="card-columns">
+                @foreach (var c in restOfComments)
             {
-                <div class="card w-50">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">@c.UserName</h5>
                         <h6 class="card-subtitle mb-2 text-muted">
                             @for (var i = 1; i <= c.Rate; i++)
-                            {
-                                <i class="material-icons">star</i>
-                            }
+                        {
+                            <i class="material-icons">star</i>
+                    }
                             @for (var i = (c.Rate + 1); i <= 5; i++)
-                            {
-                                <i class="material-icons">star_border</i>
-                            }
+                        {
+                            <i class="material-icons">star_border</i>
+                    }
                         </h6>
                         <p class="card-text">@c.Review</p>
                         <div class="card-footer">
@@ -202,51 +239,18 @@
                         </div>
                     </div>
                 </div>
-            }
-        </div>
-
-        <!--Here's the rest with a dropdown function-->
-
-        @{
-            var amountOfComments = comments.Count();
-            var restOfComments = comments.Take(amountOfComments - 3).Reverse();
         }
-
-        <div id="collapseComments" class="collapse " aria-labelledby="headingOne" data-parent="#accordion" style="margin-top:10px;">
-            <div class="card-columns">
-                @foreach (var c in restOfComments)
-                {
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">@c.UserName</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                @for (var i = 1; i <= c.Rate; i++)
-                                {
-                                    <i class="material-icons">star</i>
-                                }
-                                @for (var i = (c.Rate + 1); i <= 5; i++)
-                                {
-                                    <i class="material-icons">star_border</i>
-                                }
-                            </h6>
-                            <p class="card-text">@c.Review</p>
-                            <div class="card-footer">
-                                <p class="card-text"><small class="text-muted">@c.DateTime</small></p>
-                            </div>
-                        </div>
-                    </div>
-                }
             </div>
 
         </div>
 
         <div class="card-header nav justify-content-center" id="CommentSection">
 
-                <button class="btn btn-link nav-item" data-toggle="collapse" data-target="#collapseComments" aria-expanded="true" aria-controls="collapseComments">
-                    <i class="material-icons">keyboard_arrow_down</i>
-                </button>
-                
-            
+            <button class="btn btn-link nav-item" data-toggle="collapse" data-target="#collapseComments" aria-expanded="true" aria-controls="collapseComments">
+                <i class="material-icons">keyboard_arrow_down</i>
+            </button>
+
+
         </div>
 
 

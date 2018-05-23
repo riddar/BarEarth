@@ -26,6 +26,8 @@ namespace BarEarth.Models
         public string OpeningHours { get; set; }
         public string PhoneNumber { get; set; }
         public string PhotoReference { get; set; }
+        [ForeignKey("UserId")]
+        public ApplicationUser User { get; set; }
 
         public virtual IList<Rating> Ratings { get; set; }
         public virtual IList<Product> Products { get; set; }

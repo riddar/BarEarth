@@ -1,0 +1,51 @@
+﻿@model BarEarth.Models.Bar
+@inject BarEarth.Data.ApplicationDbContext context;
+@{ViewData["Title"] = "Products";}
+
+<div class="card mb-3" style="width: 70rem;  background-color: #fff; margin:auto; margin-top: 10vh;">
+        <div class="card-img-overlay d-flex flex-row-reverse ">
+            <button type="button" class="btn btn-primary bmd-btn-fab" style="margin-top: 200px;">
+                <i class="material-icons">directions</i>
+            </button>
+        </div>
+    </div>
+    <div class="card-header text-white" style="background-color:#2195F2">
+        <h2 class="card-title">@Model.Name Meny</h2>
+        <h6>
+            <form asp-action="Products">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.ActionLink("Name", "Products", new { sortOrder = ViewBag.Name })</th>
+                            <th>@Html.ActionLink("Type", "Products", new { sortOrder = ViewBag.Type })</th>
+                            <th>@Html.ActionLink("SubType", "Products", new { sortOrder = ViewBag.SubType })</th>
+                            <th>@Html.ActionLink("Price", "Products", new { sortOrder = ViewBag.Price })</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Products)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SubType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td>
+                                   <img src="@Html.DisplayFor(modelItem => item.PictureUrl)" style="height:150px; width:75px;" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </form>
+        </h6>
+        <h6 class="card-subtitle"></h6>
+    </div>
