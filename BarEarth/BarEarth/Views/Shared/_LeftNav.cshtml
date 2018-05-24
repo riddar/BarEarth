@@ -16,21 +16,19 @@
 <a asp-area="" asp-controller="Table" asp-action="Table" class="dropdown-item"><i class="material-icons">list</i>Listan</a>
 @if (SignInManager.IsSignedIn(User))
 {
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">crop_square</i>Sparade barer</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">settings</i>Mina recencioner</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">message</i>Mina meddelanden</a>
+    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">crop_square</i>Sparade barer</a>
+    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">settings</i>Mina recencioner</a>
+    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">message</i>Mina meddelanden</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header">Inställngar</h6>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">filter_list</i>Filter inställingar</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">settings</i>Användar intställningar</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">info</i>Om Tjänsten</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">help</i>Support</a>
+    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">filter_list</i>Filter inställingar</a>
+    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">settings</i>Användar intställningar</a>
 }
 else
 {
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header">Inställngar</h6>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">info</i>Om Tjänsten</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">help</i>Support</a>
+    <a asp-area="" asp-controller="Home" asp-action="About" class="dropdown-item btn btn-link"><i class="material-icons">info</i>Om Tjänsten</a>
+    <a asp-area="" asp-controller="Home" asp-action="Contact" class="dropdown-item btn btn-link"><i class="material-icons">help</i>Support</a>
 }
 
