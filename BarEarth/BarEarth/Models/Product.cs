@@ -22,5 +22,7 @@ namespace BarEarth.Models
         public Boolean IsFood { get; set; }
         [ForeignKey("BarId")]
         public Bar Bar { get; set; }
+
+        public int BarId { get; set; }
     }
 }
