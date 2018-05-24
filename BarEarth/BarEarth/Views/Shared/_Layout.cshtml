@@ -26,11 +26,11 @@
         <!--Header Begins-->
         <header class="bmd-layout-header PrimaryColor">
             <div class="navbar navbar-ligth bg-faded">
-                <button class="navbar-toggler btn btn-light" type="button" data-toggle="drawer" data-target="#dw-s2">
+                <button class="navbar-toggler btn btn-light col-2" type="button" data-toggle="drawer" data-target="#dw-s2">
                     <i class="material-icons">menu</i>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-light" style="margin:auto;"><img src="~/images/BarEarthLogo.png"/></a>
-                <div class="order-3 ">@await Html.PartialAsync("_LoginPartial")</div>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-light col-8" style="margin:auto;"><img src="~/images/BarEarthLogo.png"/></a>
+                <div class="order-3 col-2">@await Html.PartialAsync("_LoginPartial")</div>
             </div>
         </header>
         <!--Header ends-->
