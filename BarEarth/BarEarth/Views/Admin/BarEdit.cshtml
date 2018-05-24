@@ -1,100 +1,102 @@
 ﻿@model BarEarth.Models.Bar
+@{ViewData["Title"] = "Bars"; }
 
-<div class="card mb-3" style="width: 70rem;  background-color: #fff; margin:auto; margin-top: 10vh;">
-    <div class="card-img-overlay d-flex flex-row-reverse ">
-    </div>
-</div>
-<div class="card-header text-white" style="background-color:#2195F2">
-    <h2 class="card-title">@Model.Name</h2>
-    <h6>
-        <div class="row">
-            <div class="col-md-4">
+<div class="container" style="margin-top:15px;">
+    <div class="row justify-content-center">
+        <div class="card bg-light col-10">
+            <div class="card-img-overlay d-flex flex-row-reverse ">
+            </div>
+            <div class="card-body">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <a asp-controller="Admin" asp-action="Bars" class="btn bnt-link">
+                            <i class="material-icons">arrow_back</i>
+                        </a>
+                        @Model.Name
+                    </h2>
+                </div>
+
                 <form asp-action="BarEdit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col-md-5">
+
+                            <!--Name of bar-->
+                            <div class="form-group">
+                                <label for="BarName" asp-for="Name" class="bmd-lable-floating">Bar Name</label>
+                                <input type="text" asp-for="Name" class="form-control" id="BarName"/>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <!--Bar description-->
+                            <div class="form-group">
+                                <label for="BarDescription" asp-for="Description" class="bmd-lable-floating">Bar Description</label>
+                                <input type="text" asp-for="Description" class="form-control" id="BarDescription"/>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                            <!--Type of bar-->
+                            <div class="form-group">
+                                <label for="BarType" asp-for="Type" class="bmd-lable-floating">Bar type</label>
+                                <input type="text" asp-for="Type" class="form-control" id="BarType" />
+                                <span class="bmd-help">Don't forget to separeate the types by a comma.</span>
+                                <span asp-validation-for="Type" class="text-danger"></span>
+                            </div>
+
+                            <!-- bar Webaddress-->
+                            <div class="form-group">
+                                <label for="BarWebsite" asp-for="Website" class="bmd-lable-floating">Bar Website</label>
+                                <input type="url" asp-for="Website" class="form-control" id="BarWebsite" />
+                                <span asp-validation-for="Website" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <!--bar emailaddress-->
+                            <div class="form-group">
+                                <label for="BarEmail" asp-for="Email" class="bmd-lable-floating">Bar Email</label>
+                                <input type="email" asp-for="Email" class="form-control" id="BarEmail"/>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <!--bar physical address-->
+                            <div class="form-group">
+                                <label for="BarAddress" asp-for="Address" class="bmd-lable-floating">Bar Address</label>
+                                <input type="text" asp-for="Address" class="form-control" id="BarAddress"/>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+
+                            <!--Openhours-->
+                            <div class="form-group">
+                                <label for="BarOpenhours" asp-for="OpeningHours" class="bmd-lable-floating">Bar Openinghours</label>
+                                <input type="text" asp-for="OpeningHours" class="form-control" id="BarOpenhours" />
+                                <span class="bmd-help">Don't forget to follow the "Day: HH:MM-HH:MM" format, and to separate the days with a comma</span>
+                                <span asp-validation-for="OpeningHours" class="text-danger"></span>
+                            </div>
+
+                            <!--Bars phone nummber-->
+                            <div class="form-group">
+                                <label for="BarTel" asp-for="PhoneNumber" class="bmd-lable-floating">Bar Telephone</label>
+                                <input type="tel" asp-for="PhoneNumber" class="form-control" id="BarTel"/>
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="AgeRestriction" class="control-label"></label>
-                        <input asp-for="AgeRestriction" class="form-control" />
-                        <span asp-validation-for="AgeRestriction" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" />
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Type" class="control-label"></label>
-                        <input asp-for="Type" class="form-control" />
-                        <span asp-validation-for="Type" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Website" class="control-label"></label>
-                        <input asp-for="Website" class="form-control" />
-                        <span asp-validation-for="Website" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PlaceId" class="control-label"></label>
-                        <input asp-for="PlaceId" class="form-control" />
-                        <span asp-validation-for="PlaceId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Longitude" class="control-label"></label>
-                        <input asp-for="Longitude" class="form-control" />
-                        <span asp-validation-for="Longitude" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Latitude" class="control-label"></label>
-                        <input asp-for="Latitude" class="form-control" />
-                        <span asp-validation-for="Latitude" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Address" class="control-label"></label>
-                        <input asp-for="Address" class="form-control" />
-                        <span asp-validation-for="Address" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="OpeningHours" class="control-label"></label>
-                        <input asp-for="OpeningHours" class="form-control" />
-                        <span asp-validation-for="OpeningHours" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PhoneNumber" class="control-label"></label>
-                        <input asp-for="PhoneNumber" class="form-control" />
-                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PhotoReference" class="control-label"></label>
-                        <input asp-for="PhotoReference" class="form-control" />
-                        <span asp-validation-for="PhotoReference" class="text-danger"></span>
-                    </div>
-                    <div>
-                        <ul>
-                            <li><a asp-controller="Admin" asp-action="RatingsEdit" asp-route-id="@Model.Id" class="btn btn-raised btn-dark">Delete Ratings</a></li>
-                            <li><a asp-controller="Admin" asp-action="ProductsEdit" asp-route-id="@Model.Id" class="btn btn-raised btn-dark">Edit products</a></li>
-                            <li><a asp-controller="Admin" asp-action="CreateProduct" asp-route-id="@Model.Id" class="btn btn-raised btn-dark">Create product</a></li>
-                        </ul>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-raised btn-dark" />
+                    <hr />
+                    <div class="row">
+                        <div class="btn-group" role="group">
+                            <a asp-controller="Admin" asp-action="CreateProduct" asp-route-id="@Model.Id" class="btn btn-raised btn-secondary" style="margin-right: 5px;">Create product</a>
+                            <a asp-controller="Admin" asp-action="ProductsEdit" asp-route-id="@Model.Id" class="btn btn-raised btn-secondary" style="margin-right: 5px;">Edit products</a>
+                            <a asp-controller="Admin" asp-action="RatingsEdit" asp-route-id="@Model.Id" class="btn btn-raised btn-secondary" style="margin-right: 5px;">Delete Ratings</a>
+                        </div>
+                        <hr />
+                        <input type="submit" value="Save" class="btn btn-raised btn-primary" />
                     </div>
                 </form>
             </div>
         </div>
-    </h6>
-    <h6 class="card-subtitle"></h6>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {
