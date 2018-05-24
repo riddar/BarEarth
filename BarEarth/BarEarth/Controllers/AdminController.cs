@@ -144,7 +144,9 @@ namespace BarEarth.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduct(Product product)
         {
-            var bar = await context.Bars.Where(b => b.Id == product.BarId).FirstOrDefaultAsync();
+            var bar = await context.Bars
+                .Where(b => b.Id == product.BarId)
+                .FirstOrDefaultAsync();
 
             product.Bar = bar;
 
@@ -156,6 +158,50 @@ namespace BarEarth.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet, Route("Admin/RatingsEdit")]
+        public async Task<ActionResult> RatingsEdit(int? id)
+        {
+            if (id == null)
+                return View();
+
+            var bar = await context.Bars
+                .Where(b => b.Id == id)
+                .Include(b => b.Ratings)
+                .Include(b => b.Products)
+                .FirstOrDefaultAsync();
+
+            var Ratings = await context.Ratings
+                .Where(r => r.Bar == bar)
+                .ToListAsync();
+
+            return View(Ratings);
+        }
+
+        [HttpGet, Route("Admin/DeleteRating")]
+        public async Task<IActionResult> DeleteRating(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+
+            var rating = await context.Ratings
+                .Include(r => r.Bar)
+                .SingleOrDefaultAsync(r => r.Id == id);
+
+            var bar = await context.Bars
+                .Where(b => b == rating.Bar)
+                .Include(b => b.Products)
+                .Include(b => b.Ratings)
+                .FirstOrDefaultAsync();
+
+            if (rating == null)
+                return View();
+
+            context.Ratings.Remove(rating);
+            await context.SaveChangesAsync();
+
+            return View("RatingsEdit", bar);
         }
     }
 }
