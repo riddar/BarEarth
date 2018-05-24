@@ -1,7 +1,7 @@
 ﻿// Write your JavaScript code.
 let map = null;
-//let latitude = 57.7089;
-//let longitude = 11.9746;
+let latitude = 57.7089;
+let longitude = 11.9746;
 let currentPosition;
 let key = 'AIzaSyD4nV1sw-I7t74JHMhwkprurMSzM_WB_V8';
 let markers = [];
@@ -23,16 +23,18 @@ function initMap() {
     else {
         console.log("couldn't get position");
     }
+
+    console.log(latitudeBar);
     currentPosition = {
-        lat: latitude,
-        lng: longitude
+        lat: latitudeBar,
+        lng: longitudeBar
     };
     let myMap = document.getElementById('barViewMap');
     if (!myMap) return;
 
     map = new google.maps.Map(myMap, {
         center: currentPosition,
-        zoom: 15
+        zoom: 20
     });
     SearchBox();
 
@@ -130,7 +132,7 @@ function UpdatePosition(lati, longi) {
     });
 
     if (map)
-        map.setCenter({ lat: lati, lng: longi });
+        map.set({ lat: lati, lng: longi });
 
     //initMap();
 };
