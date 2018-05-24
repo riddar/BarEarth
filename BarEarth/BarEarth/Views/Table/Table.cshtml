@@ -11,51 +11,52 @@
 
 
 
-<div class="card-columns" style="margin-top:15px;">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card-columns col-12" style="margin-top:15px;">
 
-    @foreach (var item in Model)
-    {
+            @foreach (var item in Model)
+            {
 
-        var key = "AIzaSyD4nV1sw-I7t74JHMhwkprurMSzM_WB_V8";
-        var barPhotos = item.PhotoReference;
-        var barPhoto = barPhotos.Split(",");
-        var photoString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + barPhoto[0] + "&key=" + key;
+                var key = "AIzaSyD4nV1sw-I7t74JHMhwkprurMSzM_WB_V8";
+                var barPhotos = item.PhotoReference;
+                var barPhoto = barPhotos.Split(",");
+                var photoString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + barPhoto[0] + "&key=" + key;
 
-        var ratingSum = item.Ratings != null ? item.Ratings.Sum(r => r.Rate) : 0;
-        var ratingCount = item.Ratings != null ? item.Ratings.Count : 0;
+                var ratingSum = item.Ratings != null ? item.Ratings.Sum(r => r.Rate) : 0;
+                var ratingCount = item.Ratings != null ? item.Ratings.Count : 0;
 
-        decimal rating = 0;
-        if (ratingCount > 0)
-        {
-            rating = (ratingSum / ratingCount);
-        }
-        var totalRating = decimal.Parse(rating.ToString());
+                decimal rating = 0;
+                if (ratingCount > 0)
+                {
+                    rating = (ratingSum / ratingCount);
+                }
+                var totalRating = decimal.Parse(rating.ToString());
 
-        <div class="card" style="">
-            <a asp-action="Bar" asp-controller="Bar" asp-route-id="@item.Id">
-                <img class="card-img-top" src=@photoString alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">@item.Name</h4>
-                    @for (var i = 1; i <= rating; i++)
-                    {
-                        <i class="material-icons">
-                            star
-                        </i>
-                    }
-                    @for (var i = (rating + 1); i <= 5; i++)
-                    {
-                        <i class="material-icons">
-                            star_border
-                        </i>
-                    }
-
-                    @*<p class="card-text">Some example text.</p>
-                        <a href="#" class="btn btn-primary">See details</a>*@
+                <div class="card" style="width:360px; max-width:360px; min-width:360px; min-height: 360px; max-height:360px; height:360px;">
+                    <a asp-action="Bar" asp-controller="Bar" asp-route-id="@item.Id">
+                        <div class="card-img-top" style="background-image: url(@photoString); height: 250px; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative;"></div>
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-size:18px;">@item.Name</h5>
+                            @for (var i = 1; i <= rating; i++)
+                            {
+                                <i class="material-icons">
+                                    star
+                                </i>
+                            }
+                            @for (var i = (rating + 1); i <= 5; i++)
+                            {
+                                <i class="material-icons">
+                                    star_border
+                                </i>
+                            }
+                        </div>
+                    </a>
                 </div>
-            </a>
+
+            }
+
         </div>
-
-    }
-
+    </div>
 </div>
 
