@@ -132,8 +132,11 @@ namespace BarEarth.Controllers
         }
 
         [HttpGet, Route("Admin/CreateProduct")]
-        public IActionResult CreateProduct()
+        public IActionResult CreateProduct(int? id)
         {
+            if(id.HasValue)
+                ViewData["BarId"] = id;
+
             return View();
         }
 
@@ -141,14 +144,18 @@ namespace BarEarth.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduct(Product product)
         {
+            var bar = await context.Bars.Where(b => b.Id == product.BarId).FirstOrDefaultAsync();
+
+            product.Bar = bar;
 
             if (ModelState.IsValid)
             {
                 context.Add(product);
                 await context.SaveChangesAsync();
-                return View();
+                return RedirectToAction("Index", "Home");
             }
-            return View(product);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

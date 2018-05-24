@@ -1,5 +1,6 @@
 ﻿@model BarEarth.Models.Product
 @inject BarEarth.Data.ApplicationDbContext _context;
+@{int? BarId = (int?)ViewData["BarId"];}
 
 <h4>Product</h4>
 <hr />
@@ -33,14 +34,24 @@
                 <span asp-validation-for="PictureUrl" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                <select asp-for="Bar.Id" class="control-label">
+                <select asp-for="Bar" class="control-label" asp-items="@_context.Bars.Where(b => b.User.UserName == User.Identity.Name)">
                     @foreach (var bar in _context.Bars.Where(b => b.User.UserName == User.Identity.Name))
                     {
-                        <option asp-for="@bar.Id" class="form-control">@bar.Name</option>
+                        <option asp-for="@bar" class="form-control">@bar.Name</option>
                     }
                     <span asp-validation-for="Bar" class="text-danger"></span>
                 </select>
             </div>*@
+            <div class="form-group">
+                @if(BarId != null)
+                {
+                    <label asp-for="BarId" class="control-label"></label>
+                    <input asp-for="@BarId" class="form-control" />
+                    <span asp-validation-for="BarId" class="text-danger"></span>
+                }
+
+
+            </div>
             <div class="form-group">
                 <div class="checkbox">
                     <label>
