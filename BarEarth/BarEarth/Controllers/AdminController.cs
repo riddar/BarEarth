@@ -154,7 +154,7 @@ namespace BarEarth.Controllers
             {
                 context.Add(product);
                 await context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return View("ProductsEdit", bar);
             }
 
             return RedirectToAction("Index", "Home");
