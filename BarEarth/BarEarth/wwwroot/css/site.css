@@ -33,6 +33,9 @@
     .carousel-caption {
         display: none;
     }
+    #logoutForm{
+        display:none;
+    }
 }
 
 /*ADDED BY US*/
