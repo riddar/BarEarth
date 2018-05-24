@@ -15,6 +15,10 @@
 </header>
 <a asp-area="" asp-controller="Map" asp-action="Map" class="dropdown-item"><i class="material-icons">map</i>Kartan</a>
 <a asp-area="" asp-controller="Table" asp-action="Table" class="dropdown-item"><i class="material-icons">list</i>Listan</a>
+@if (SignInManager.IsSignedIn(User) && Context.Bars.Where(b => b.User.UserName == User.Identity.Name).Count() > 0)
+{
+    <a asp-area="" asp-controller="Admin" asp-action="Bars" class="dropdown-item"><i class="material-icons">home</i>Admin</a>
+}
 @if (SignInManager.IsSignedIn(User))
 {
     <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">crop_square</i>Sparade barer</a>
