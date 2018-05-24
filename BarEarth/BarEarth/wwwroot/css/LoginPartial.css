@@ -1,9 +1,0 @@
-﻿body {
-}
-
-
-@media screen and (max-width: 767px) {
-    #logoutForm {
-        display: none;
-    }
-}
