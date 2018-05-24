@@ -29,7 +29,7 @@ namespace BarEarth.Controllers
             if (id == null)
                 return View();
 
-            Bar Bar = context.Bars.FirstOrDefault(b => b.Id == id);
+            Bar Bar = context.Bars.Include(b => b.Products).FirstOrDefault(b => b.Id == id);
 
             if (Bar == null)
                 return View();
@@ -62,7 +62,7 @@ namespace BarEarth.Controllers
             if (name == null)
                 return View();
 
-            Bar bar = await context.Bars.Where(b => b.Name == name).Include(b => b.Ratings).FirstOrDefaultAsync();
+            Bar bar = await context.Bars.Where(b => b.Name == name).Include(b => b.Ratings).Include(b => b.Products).FirstOrDefaultAsync();
 
             ViewBag.BarId = bar.Id;
 
@@ -93,7 +93,7 @@ namespace BarEarth.Controllers
             {
                 return View() ;
             }
-            Bar Bar = context.Bars.FirstOrDefault(b => b.Id==id);
+            Bar Bar = context.Bars.Include(b => b.Products).FirstOrDefault(b => b.Id==id);
 
             
             if (Bar == null)

@@ -1,0 +1,60 @@
+﻿@model BarEarth.Models.Product
+@inject BarEarth.Data.ApplicationDbContext _context;
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="CreateProduct">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubType" class="control-label"></label>
+                <input asp-for="SubType" class="form-control" />
+                <span asp-validation-for="SubType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PictureUrl" class="control-label"></label>
+                <input asp-for="PictureUrl" class="form-control" />
+                <span asp-validation-for="PictureUrl" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <select asp-for="Bar.Id" class="control-label">
+                    @foreach (var bar in _context.Bars.Where(b => b.User.UserName == User.Identity.Name))
+                    {
+                        <option asp-for="@bar.Id" class="form-control">@bar.Name</option>
+                    }
+                    <span asp-validation-for="Bar" class="text-danger"></span>
+                </select>
+            </div>*@
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsFood" /> @Html.DisplayNameFor(model => model.IsFood)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-raised btn-dark" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

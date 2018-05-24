@@ -18,6 +18,8 @@ namespace BarEarth.Models
         public int Price { get; set; }
         public string Type { get; set; }
         public string SubType { get; set; }
+        public string PictureUrl { get; set; }
+        public Boolean IsFood { get; set; }
         [ForeignKey("BarId")]
         public Bar Bar { get; set; }
     }

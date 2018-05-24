@@ -43,12 +43,6 @@ namespace BarEarth.Controllers
                 case "Price_desc":
                     Bars = Bars; //add products first
                     break;
-                case "Distance":
-                    Bars = Bars; // adddistance first
-                    break;
-                case "Distance_desc":
-                    Bars = Bars; //add distance first
-                    break;
                 case "Comment":
                     Bars = Bars.OrderBy(b => b.Ratings.Count()).ToList();
                     break;

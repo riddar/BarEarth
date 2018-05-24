@@ -11,9 +11,10 @@ using System;
 namespace BarEarth.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180523094414_BarUserId")]
+    partial class BarUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,13 +124,9 @@ namespace BarEarth.Data.Migrations
 
                     b.Property<int?>("BarId");
 
-                    b.Property<bool>("IsFood");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
-
-                    b.Property<string>("PictureUrl");
 
                     b.Property<int>("Price");
 

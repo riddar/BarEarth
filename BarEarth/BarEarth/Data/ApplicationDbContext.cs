@@ -31,6 +31,7 @@ namespace BarEarth.Data
             builder.Entity<Bar>().Property(b => b.Description).HasMaxLength(500);
             builder.Entity<Bar>().Property(b => b.Website).HasMaxLength(100);
             builder.Entity<Bar>().Property(b => b.Email).HasMaxLength(100);
+            builder.Entity<Bar>().HasOne(b => b.User).WithMany(u => u.Bars);
  
 
             // Rating

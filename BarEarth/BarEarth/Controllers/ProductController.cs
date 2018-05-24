@@ -18,10 +18,16 @@ namespace BarEarth.Controllers
             context = _context;
         }
 
-        [HttpGet, ActionName("Products")]
-        public async Task<IActionResult> ProductsGet(string sortOrder)
+        [HttpGet]
+        public async Task<IActionResult> Products(int? id)
         {
-            var products = await context.Products.ToListAsync();
+            if (id == null)
+                return NotFound();
+
+            var bar = await context.Bars.Where(b => b.Id == id).Include(b => b.Products).FirstOrDefaultAsync();
+            var products = bar.Products;
+
+            string sortOrder = "";
 
             ViewBag.BarName = sortOrder == "Name" ? "Name_desc" : "Name";
             ViewBag.Price = sortOrder == "Price" ? "Price_desc" : "Price";
@@ -57,7 +63,7 @@ namespace BarEarth.Controllers
                 default:
                     break;
             }
-            return View(products);
+            return View(bar);
         }
 
     }

@@ -1,0 +1,74 @@
+﻿@model BarEarth.Models.Bar
+@inject BarEarth.Data.ApplicationDbContext context;
+@{ViewData["Title"] = "Products";}
+
+<div class="card mb-3" style="width: 70rem;  background-color: #fff; margin:auto; margin-top: 10vh;">
+    <div class="card-img-overlay d-flex flex-row-reverse ">
+        <button type="button" class="btn btn-primary bmd-btn-fab" style="margin-top: 200px;">
+            <i class="material-icons">directions</i>
+        </button>
+    </div>
+</div>
+<div class="card-header text-white" style="background-color:#2195F2">
+    <h2 class="card-title">Meny</h2>
+    <h6>
+        <form asp-action="ProductsEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.ActionLink("Name", "Products", new { sortOrder = ViewBag.Name })</th>
+                        <th>@Html.ActionLink("Type", "Products", new { sortOrder = ViewBag.Type })</th>
+                        <th>@Html.ActionLink("SubType", "Products", new { sortOrder = ViewBag.SubType })</th>
+                        <th>@Html.ActionLink("Price", "Products", new { sortOrder = ViewBag.Price })</th>
+                        <th>ImageUrl</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Products)
+                    {
+                    <tr>
+                        <td>
+                            <label asp-for="@item.Name" class="control-label"></label>
+                            <br /><input asp-for="@item.Name" class="form-control" />
+                            <span asp-validation-for="@item.Name" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <label asp-for="@item.Type" class="control-label"></label>
+                            <br /><input asp-for="@item.Type" class="form-control" />
+                            <span asp-validation-for="@item.Type" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <label asp-for="@item.SubType" class="control-label"></label>
+                            <br /><input asp-for="@item.SubType" class="form-control" />
+                            <span asp-validation-for="@item.SubType" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <label asp-for="@item.Price" class="control-label"></label>
+                            <br /><input asp-for="@item.Price" class="form-control" />
+                            <span asp-validation-for="@item.Price" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <label asp-for="@item.PictureUrl" class="control-label"></label>
+                            <br /><input asp-for="@item.PictureUrl" class="form-control" />
+                            <span asp-validation-for="@item.PictureUrl" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <label>
+                                <input asp-for="@item.IsFood" /> @Html.DisplayNameFor(modelitem => item.IsFood)
+                            </label>
+                        </td>
+                        <td>
+                            <a asp-action="SaveProduct" type="button" asp-route-id="@item" class="btn btn-raised btn-dark">Save</a>
+                            <a asp-action="DeleteProduct" type="button" asp-route-id="@item.Id" class="btn btn-raised btn-dark">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+        </form>
+    </h6>
+    <h6 class="card-subtitle"></h6>
+</div>
