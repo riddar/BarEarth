@@ -31,7 +31,7 @@ namespace BarEarth.Controllers
 
             var count = existingBar.Count();
 
-            if (count==0)
+            if (count==0 && bar.Name!=null)
             {
                 Bar2.Name = bar.Name;
                 Bar2.PlaceId = bar.PlaceId;
