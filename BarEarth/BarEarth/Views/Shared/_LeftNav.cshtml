@@ -6,47 +6,30 @@
 @inject UserManager<ApplicationUser> UserManager
 <!--Stuff to be added-->
 
+
+<header class="SecondaryColor">
+    <i class="material-icons" style="font-size:84px;">account_circle</i>
+</header>
+<header class="SecondaryColor">
+    @await Html.PartialAsync("_LoginPartial")
+</header>
+<a asp-area="" asp-controller="Map" asp-action="Map" class="dropdown-item"><i class="material-icons">map</i>Kartan</a>
+<a asp-area="" asp-controller="Table" asp-action="Table" class="dropdown-item"><i class="material-icons">list</i>Listan</a>
 @if (SignInManager.IsSignedIn(User))
 {
-    <header style="background-color:#0069C0">
-        <i class="material-icons" style="font-size:84px;">account_circle</i>
-    </header>
-    <header style="background-color:#0069C0">
-        @await Html.PartialAsync("_LoginPartial")
-    </header>
-    <a asp-area="" asp-controller="Map" asp-action="Map" class="dropdown-item"><i class="material-icons">map</i>Kartan</a>
-    <a asp-area="" asp-controller="Table" asp-action="Table" class="dropdown-item"><i class="material-icons">list</i>Listan</a>
-    if (Context.Bars.Where(b => b.User.UserName == User.Identity.Name).Count() > 0)
-    {
-        <a asp-area="" asp-controller="Admin" asp-action="Bars" class="dropdown-item"><i class="material-icons">home</i>Bars</a>
-    }
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">crop_square</i>Sparade barer</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">settings</i>Mina recencioner</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">message</i>Mina meddelanden</a>
+    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">crop_square</i>Sparade barer</a>
+    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">settings</i>Mina recencioner</a>
+    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">message</i>Mina meddelanden</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header">Inställngar</h6>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">filter_list</i>Filter inställingar</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">settings</i>Användar intställningar</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">info</i>Om Tjänsten</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">help</i>Support</a>
-}
-else if (SignInManager.IsSignedIn(User))
-{
-
+    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">filter_list</i>Filter inställingar</a>
+    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item btn btn-link"><i class="material-icons">settings</i>Användar intställningar</a>
 }
 else
 {
-    <header style="background-color:#0069C0">
-        <i class="material-icons" style="font-size:84px;">account_circle</i>
-    </header>
-    <header style="background-color:#0069C0">
-        @await Html.PartialAsync("_LoginPartial")
-    </header>
-    <a asp-area="" asp-controller="Home" asp-action="Map" class="dropdown-item"><i class="material-icons">map</i>Kartan</a>
-    <a asp-area="" asp-controller="Home" asp-action="Table" class="dropdown-item"><i class="material-icons">list</i>Listan</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header">Inställngar</h6>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">info</i>Om Tjänsten</a>
-    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-item"><i class="material-icons">help</i>Support</a>
+    <a asp-area="" asp-controller="Home" asp-action="About" class="dropdown-item btn btn-link"><i class="material-icons">info</i>Om Tjänsten</a>
+    <a asp-area="" asp-controller="Home" asp-action="Contact" class="dropdown-item btn btn-link"><i class="material-icons">help</i>Support</a>
 }
 
