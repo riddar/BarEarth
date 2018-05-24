@@ -15,10 +15,15 @@
 
     @foreach (var item in Model)
     {
-        
+
+        var key = "AIzaSyD4nV1sw-I7t74JHMhwkprurMSzM_WB_V8";
+        var barPhotos = item.PhotoReference;
+        var barPhoto = barPhotos.Split(",");
+        var photoString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + barPhoto[0] + "&key=" + key;
+
     <div class="card" style="">
         <a asp-action="Bar" asp-controller="Bar" asp-route-id="@item.Id">
-            <img class="card-img-top" src="~/images/barpicexample.jpg" alt="Card image">
+            <img class="card-img-top" src=@photoString alt="Card image">
             <div class="card-body">
                 <h4 class="card-title">@item.Name</h4>
                 @*<p class="card-text">Some example text.</p>
