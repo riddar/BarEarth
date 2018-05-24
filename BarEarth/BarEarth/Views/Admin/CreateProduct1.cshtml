@@ -41,19 +41,19 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="SubType" asp-for="SubType" class="bmd-lable-floating">Product subtype</label>
-                                <input type="text" asp-for="SubType" class="form-control" id="SubType" />
+                                <input asp-for="SubType" class="form-control" id="SubType" />
                                 <span asp-validation-for="SubType" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label for="PictureURL" asp-for="PictureUrl" class="bmd-lable-floating">Picture URL</label>
-                                <input type="url" asp-for="PictureUrl" class="form-control" id="PictureURL" />
+                                <input asp-for="PictureUrl" class="form-control" id="PictureURL" />
                                 <span asp-validation-for="PictureUrl" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 @if (BarId != null)
                                 {
                                     <label for="BarId" asp-for="BarId" class="control-label">Bar ID</label>
-                                    <input type="text" asp-for="@BarId" class="form-control" id="BarId" />
+                                    <input asp-for="@BarId" class="form-control" id="BarId" />
                                     <span asp-validation-for="BarId" class="text-danger"></span>
                                 }
                             </div>
