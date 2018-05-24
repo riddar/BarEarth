@@ -11,9 +11,10 @@ using System;
 namespace BarEarth.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180524082948_addedtotalratingtorating")]
+    partial class addedtotalratingtorating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,8 +81,6 @@ namespace BarEarth.Data.Migrations
 
                     b.Property<int>("AgeRestriction");
 
-                    b.Property<int>("AmountOfStars");
-
                     b.Property<string>("Description")
                         .HasMaxLength(500);
 
@@ -103,8 +102,6 @@ namespace BarEarth.Data.Migrations
                     b.Property<string>("PhotoReference");
 
                     b.Property<string>("PlaceId");
-
-                    b.Property<int>("TotalRating");
 
                     b.Property<string>("Type");
 
@@ -160,6 +157,8 @@ namespace BarEarth.Data.Migrations
                     b.Property<int>("Rate");
 
                     b.Property<string>("Review");
+
+                    b.Property<int>("TotalRating");
 
                     b.Property<string>("UserName");
 

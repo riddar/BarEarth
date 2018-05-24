@@ -19,15 +19,48 @@ namespace BarEarth.Controllers
         }
 
         [HttpGet, ActionName("Table")]
-        public async Task<IActionResult> TableGet(string sortOrder, string address)
+        public ActionResult TableGet(string sortOrder, string address)
         {
-            var Bars = await context.Bars.ToListAsync();
+            var Bars = context.Bars.ToList();
 
             ViewBag.BarName = sortOrder == "BarName" ? "BarName_desc" : "BarName";
             ViewBag.Price = sortOrder == "Price" ? "Price_desc" : "Price";
             ViewBag.Distance = sortOrder == "Distance" ? "Distance_desc" : "Distance";
             ViewBag.Comments = sortOrder == "Comment" ? "Comments_desc" : "Comment";
             ViewBag.Rating = sortOrder == "Rating" ? "Rating_desc" : "Rating";
+
+
+            for (int i = 0; i < Bars.Count; i++)
+            {
+                var ratings = context.Ratings.Where(d => d.Bar.Id == Bars[i].Id).ToList();
+
+                if (ratings.Count() > 0)
+                {
+                    var bar = Bars[i];
+                    var barRatings = context.Ratings.Where(r => r.Id == bar.Id);
+
+
+
+                    var ratingSum = barRatings.Select(x => x.Rate).Sum();
+
+                    ViewBag.RatingSum = ratingSum;
+                    var ratingCount = barRatings.Count();
+                    ViewBag.RatingCount = ratingCount;
+
+                    bar.TotalRating = ratingSum;
+                    bar.AmountOfStars = ratingCount;
+
+                    context.Bars.Update(bar);
+
+                    context.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.RatingSum = 0;
+                    ViewBag.RatingCount = 0;
+                }
+
+            }
 
             switch (sortOrder)
             {
@@ -53,7 +86,7 @@ namespace BarEarth.Controllers
                     Bars = Bars.OrderBy(b => b.Ratings.Average(rating => rating.Rate)).ToList();
                     break;
                 case "Rating_desc":
-                    Bars = Bars.OrderByDescending(b => b.Ratings.Average(rating =>rating.Rate)).ToList();
+                    Bars = Bars.OrderByDescending(b => b.Ratings.Average(rating => rating.Rate)).ToList();
                     break;
                 default:
                     break;

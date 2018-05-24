@@ -28,6 +28,8 @@ namespace BarEarth.Models
         public string PhotoReference { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
+        public int TotalRating { get; set; }
+        public int AmountOfStars { get; set; }
 
         public virtual IList<Rating> Ratings { get; set; }
         public virtual IList<Product> Products { get; set; }
