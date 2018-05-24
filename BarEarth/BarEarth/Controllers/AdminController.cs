@@ -84,26 +84,71 @@ namespace BarEarth.Controllers
             return View(bar);
         }
 
-        [HttpPost, Route("Admin/ProductsEdit")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ProductEditPost(Bar bar)
+        [HttpGet, Route("Admin/SaveProduct")]
+        public async Task<ActionResult> SaveProduct(Product product)
         {
-            if (bar == null)
-                return View();
+            if (product == null)
+                return RedirectToAction("Index", "Home");
 
-            foreach(var product in bar.Products)
-            {
-                context.Update(product);
-                await context.SaveChangesAsync();
-            }
+            product = await context.Products
+                .Include(p => p.Bar)
+                .SingleOrDefaultAsync(m => m.Id == product.Id);
 
-            bar = await context.Bars
-                .Where(b => b.Id == bar.Id)
-                .Include(b => b.Ratings)
+            var bar = await context.Bars
+                .Where(b => b == product.Bar)
                 .Include(b => b.Products)
+                .Include(b => b.Ratings)
                 .FirstOrDefaultAsync();
 
-            return RedirectToAction("Index", "Home");
+            context.Update(product);
+            await context.SaveChangesAsync();
+
+            return View("ProductsEdit", bar);
+        }
+
+        [HttpGet, Route("Admin/DeleteProduct")]
+        public async Task<IActionResult> DeleteProduct(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+
+            var product = await context.Products
+                .Include(p => p.Bar)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            var bar = await context.Bars
+                .Where(b => b == product.Bar)
+                .Include(b => b.Products)
+                .Include(b => b.Ratings)
+                .FirstOrDefaultAsync();
+            
+            if (product == null)
+                return View();
+
+            context.Products.Remove(product);
+            await context.SaveChangesAsync();
+
+            return View("ProductsEdit", bar);
+        }
+
+        [HttpGet, Route("Admin/CreateProduct")]
+        public IActionResult CreateProduct()
+        {
+            return View();
+        }
+
+        [HttpPost, Route("Admin/CreateProduct")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateProduct(Product product)
+        {
+
+            if (ModelState.IsValid)
+            {
+                context.Add(product);
+                await context.SaveChangesAsync();
+                return View();
+            }
+            return View(product);
         }
     }
 }

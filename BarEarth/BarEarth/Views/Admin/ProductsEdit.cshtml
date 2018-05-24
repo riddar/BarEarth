@@ -10,7 +10,7 @@
     </div>
 </div>
 <div class="card-header text-white" style="background-color:#2195F2">
-    <h2 class="card-title">@Model.Name Meny</h2>
+    <h2 class="card-title">Meny</h2>
     <h6>
         <form asp-action="ProductsEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -58,15 +58,17 @@
                             <label>
                                 <input asp-for="@item.IsFood" /> @Html.DisplayNameFor(modelitem => item.IsFood)
                             </label>
-                        </td>  
+                        </td>
+                        <td>
+                            <a asp-action="SaveProduct" type="button" asp-route-id="@item" class="btn btn-raised btn-dark">Save</a>
+                            <a asp-action="DeleteProduct" type="button" asp-route-id="@item.Id" class="btn btn-raised btn-dark">Delete</a>
+                        </td>
                     </tr>
                     }
                 </tbody>
             </table>
-            <td class="form-group">
-                <input type="submit" value="Save" class="btn btn-raised btn-dark" />
-            </td>
-        </form>  
+
+        </form>
     </h6>
     <h6 class="card-subtitle"></h6>
 </div>
