@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BarEarth.Data.Migrations
 {
-    public partial class migration : Migration
+    public partial class lastMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

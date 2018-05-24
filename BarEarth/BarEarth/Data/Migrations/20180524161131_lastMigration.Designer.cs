@@ -11,8 +11,8 @@ using System;
 namespace BarEarth.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180524145040_[migration]")]
-    partial class migration
+    [Migration("20180524161131_lastMigration")]
+    partial class lastMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -2,87 +2,67 @@
 @inject BarEarth.Data.ApplicationDbContext _context;
 @{int? BarId = (int?)ViewData["BarId"];}
 
-
-<div class="container" style="margin-top:15px;">
-    <div class="row justify-content-center">
-        <div class="card bg-light col-10">
-            <div class="card-img-overlay d-flex flex-row-reverse ">
-            </div>
-            <div class="card-body">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        <a asp-controller="Admin" asp-action="Bars" class="btn bnt-link">
-                            <i class="material-icons">arrow_back</i>
-                        </a>
-                        Create Product
-                    </h2>
-                </div>
-
+<div class="card mb-3" style="width: 70rem;  background-color: #fff; margin:auto; margin-top: 10vh;">
+    <div class="card-img-overlay d-flex flex-row-reverse ">
+    </div>
+</div>
+<div class="card-header text-white" style="background-color:#2195F2">
+    <h2 class="card-title">Create Product</h2>
+    <h6>
+        <div class="row">
+            <div class="col-md-4">
                 <form asp-controller="Admin" asp-action="CreateProduct">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" />
-                    <div class="row">
-                        <div class="col-md-5">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Type" class="control-label"></label>
+                        <input asp-for="Type" class="form-control" />
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SubType" class="control-label"></label>
+                        <input asp-for="SubType" class="form-control" />
+                        <span asp-validation-for="SubType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PictureUrl" class="control-label"></label>
+                        <input asp-for="PictureUrl" class="form-control" />
+                        <span asp-validation-for="PictureUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @if (BarId != null)
+                        {
+                            <label asp-for="BarId" class="control-label"></label>
+                            <input asp-for="@BarId" class="form-control" />
+                            <span asp-validation-for="BarId" class="text-danger"></span>
+                        }
 
-                            <!--Name of Product-->
-                            <div class="form-group">
-                                <label for="ProductName" asp-for="Name" class="bmd-lable-floating">Product Name</label>
-                                <input type="text" asp-for="Name" class="form-control" id="ProductName" />
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
 
-                            <!--Product price-->
-                            <div class="form-group">
-                                <label for="ProductPrice" asp-for="Price" class="bmd-lable-floating">Product price</label>
-                                <input type="number" asp-for="Price" class="form-control" id="ProductPrice" />
-                                <span asp-validation-for="Price" class="text-danger"></span>
-                            </div>
-
-                            <!--Type of product-->
-                            <div class="form-group">
-                                <label for="ProductType" asp-for="Type" class="bmd-lable-floating">Product type</label>
-                                <input type="text" asp-for="Type" class="form-control" id="BarType" />
-                                <span asp-validation-for="Type" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="col-md-5">
-                            <!--bar emailaddress-->
-                            <div class="form-group">
-                                <label for="SubType" asp-for="SubType" class="bmd-lable-floating">Product subtype</label>
-                                <input type="text" asp-for="SubType" class="form-control" id="SubType" />
-                                <span asp-validation-for="SubType" class="text-danger"></span>
-                            </div>
-
-                            <!--Product pic id-->
-                            <div class="form-group">
-                                <label for="PictureURL" asp-for="PictureUrl" class="bmd-lable-floating">Picture URL</label>
-                                <input type="url" asp-for="PictureUrl" class="form-control" id="PictureURL" />
-                                <span asp-validation-for="PictureUrl" class="text-danger"></span>
-                            </div>
-
-                            <!--Openhours-->
-                            <div class="form-group">
-                                @if (BarId != null)
-                                {
-                                <label for="BarId" asp-for="BarId" class="control-label">Bar ID</label>
-                                <input type="text" asp-for="@BarId" class="form-control" id="BarId" />
-                                <span asp-validation-for="BarId" class="text-danger"></span>
-                                }
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="IsFood" /> @Html.DisplayNameFor(model => model.IsFood)
+                            </label>
                         </div>
                     </div>
-                    <hr />
-                    <div class="row">
-                        <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-raised btn-primary" />
-                            <input asp-for="IsFood" /> @Html.DisplayNameFor(model => model.IsFood)
-                        </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-raised btn-dark" />
                     </div>
                 </form>
             </div>
         </div>
-    </div>
+    </h6>
+    <h6 class="card-subtitle"></h6>
 </div>
 
 @section Scripts {
