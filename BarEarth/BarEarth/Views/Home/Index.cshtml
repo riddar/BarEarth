@@ -5,21 +5,27 @@
 
 
 
-<div class="card" style="width: 18rem; background-color: #fff; margin:auto; margin-top: 20vh;">
-    <div class="card-body" style="padding:16px">
-        <form asp-action="Index" asp-controller="Index">
-            <div class="form-group">
-                <div class="form-group">
-                    <!-- left unspecified, .bmd-form-group will be automatically added (inspect the code) -->
-                    <label for="formGroupExampleInput" class="bmd-label-floating">Namn, address, etc.</label>
-                    <input type="text" class="form-control control-label" asp-for="PlaceId" id="formGroupExampleInput" />
-                </div>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-auto justify-content-center">
+            <div class="card" style="width:350px; margin-top: 20vh; ">
+                <div class="card-body" style="padding:16px">
+                    <form asp-action="Index" asp-controller="Index">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <!-- left unspecified, .bmd-form-group will be automatically added (inspect the code) -->
+                                <label for="formGroupExampleInput" class="bmd-label-floating">Namn, address, etc.</label>
+                                <input type="text" class="form-control control-label" asp-for="PlaceId" id="formGroupExampleInput" />
+                            </div>
 
+                        </div>
+                        <button type="submit" asp-action="IndexTablePost" class="btn btn-raised btn-dark">Table</button>
+                        <button type="submit" asp-action="IndexMapPost" class="btn btn-raised btn-dark">Map</button>
+                        <button type="button" class="btn btn-dark"><i class="material-icons">place</i></button>
+                    </form>
+                </div>
             </div>
-            <button type="submit" asp-action="IndexTablePost" class="btn btn-raised btn-dark">Table</button>
-            <button type="submit" asp-action="IndexMapPost" class="btn btn-raised btn-dark">Map</button>
-            <button type="button" class="btn btn-dark"><i class="material-icons">place</i></button>
-        </form>
+        </div>
     </div>
 </div>
 
